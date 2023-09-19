@@ -12,6 +12,7 @@ int main(void)
 	printf("%p %lld\n", ptr, (long long)ptr); // 0000000000000004 4
 	// char* ptr 0000000000000001 1
 	// double* ptr 0000000000000008 8
+	// void* ptr Error unknown size
 
 	// ptr = -ptr; // Not working
 	// ptr = +ptr; // Not working
