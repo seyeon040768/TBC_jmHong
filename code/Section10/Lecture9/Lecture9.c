@@ -42,7 +42,7 @@ int main(void)
 	double d = 3.14;
 	double* ptrD = &d;
 
-	if (ptr1 == ptrD) // warning C4133
+	if (ptr1 == ptrD) // warning C4133: '==': incompatible types - from 'double *' to 'int *'
 	{
 		printf("Same\n");
 	}
