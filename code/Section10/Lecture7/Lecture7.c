@@ -16,14 +16,12 @@ double average(double arr[5])
 }*/
 
 /*
+* Prototypes
 * double average(double* arr, int n);
 * double average(double*, int n);
 * double average(double arr[], int n);
 * double average(double [], int n);
 */
-
-double average(double*, int n);
-
 
 double average(double* arr, int n)
 {
