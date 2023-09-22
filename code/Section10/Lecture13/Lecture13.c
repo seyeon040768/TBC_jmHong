@@ -64,7 +64,7 @@ int main(void)
 
 	for (int i = 0; i < n; ++i)
 	{
-		printf("%s at %ld\n", name[i], (long long)name[i]);
+		printf("%s at %u\n", name[i], (unsigned)name[i]);
 	}
 	printf("\n");
 
@@ -74,7 +74,7 @@ int main(void)
 
 	for (int i = 0; i < n; ++i)
 	{
-		printf("%s at %ld\n", aname[i], (long long)aname[i]);
+		printf("%s at %u\n", aname[i], (unsigned)aname[i]);
 	}
 	printf("\n");
 
