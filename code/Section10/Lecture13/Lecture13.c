@@ -65,6 +65,12 @@ int main(void)
 	for (int i = 0; i < n; ++i)
 	{
 		printf("%s at %lld\n", name[i], (long long)name[i]);
+		/* 간격이 연속적이지 않음
+		Aladdin at 140702837288272
+		Jasmine at 140702837288120
+		Magic Carpet at 140702837288128
+		Genie at 140702837288288
+		*/
 	}
 	printf("\n");
 
@@ -72,9 +78,16 @@ int main(void)
 
 	const int an = sizeof(aname) / sizeof(char[15]);
 
-	for (int i = 0; i < n; ++i)
+	for (int i = 0; i < an; ++i)
 	{
 		printf("%s at %lld\n", aname[i], (long long)aname[i]);
+		/* 15의 간격
+		aladdin at 487001683472
+		jasmine at 487001683487
+		magic carpet at 487001683502
+		genie at 487001683517
+		jafar at 487001683532
+		*/
 	}
 	printf("\n");
 
