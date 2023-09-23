@@ -31,7 +31,7 @@ int main(void)
 		{9, 0, 1, 2}
 	};
 
-	printf("%d\n", sum2d_4(ROWS, COLS, data));
+	printf("%d\n", sum2d(ROWS, COLS, data));
 
 	return 0;
 }
