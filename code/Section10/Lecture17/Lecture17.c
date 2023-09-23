@@ -1,5 +1,5 @@
 ﻿// can't run on visual studio
-// please use another c compiler
+// please use another c compiler(online c compiler)
 #include <stdio.h>
 
 #define ROWS 3
