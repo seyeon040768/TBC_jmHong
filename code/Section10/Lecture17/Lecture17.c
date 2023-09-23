@@ -1,4 +1,6 @@
-﻿#include <stdio.h>
+﻿// can't run on visual studio
+// please use another c compiler
+#include <stdio.h>
 
 #define ROWS 3
 #define COLS 4
