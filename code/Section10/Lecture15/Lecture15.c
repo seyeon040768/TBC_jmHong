@@ -24,7 +24,7 @@ int main(void)
 
 	p2 = &pt;
 	*p2 = ar2[0];
-	p2 = ar2; // warning
+	// p2 = ar2; // warning
 	// p2: pointer to pointer to int
 	// ar2 pointer to array-of-2-ints*/
 
@@ -34,7 +34,7 @@ int main(void)
 	int* p1 = &x;
 	const int* p2 = &y;
 	const int** pp2 = &p1;
-	p1 = p2; // warning
+	// p1 = p2; // warning
 
 	// *p2 = 123; // Error
 	p2 = p1;
@@ -56,7 +56,7 @@ int main(void)
 	const int y;
 	const int* p2 = &y;
 	int* p1;
-	p1 = p2; // warning (Error in c++)
+	// p1 = p2; // warning (Error in c++)
 
 	return 0;
 }
