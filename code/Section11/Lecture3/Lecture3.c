@@ -6,6 +6,7 @@ int main(void)
 		"Dancing in the rain",
 		"Counting apples",
 		"Watching movies with friends",
+		"Writing sad letters",
 		"Studying the C language",
 	};
 
