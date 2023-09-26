@@ -3,6 +3,11 @@
 
 void FitStr(char*, unsigned int);
 
+char* myStrncat(char* destination, char* source, size_t count);
+char* myStrcat(char* destination, char* source);
+int myStrncmp(char* str1, char* str2, size_t maxCount);
+int myStrcmp(char* str1, char* str2);
+
 int main(void)
 {
 	/*char msg[] = "Just,"" do it!";
@@ -60,6 +65,21 @@ int main(void)
 	printf("%s\n", strstr("Hello, World", "wor")); // (null)
 	printf("%s\n", strstr("Hello, World", "Wor")); // World
 
+
+	char str1[100] = "First string";
+	char str2[] = "Second string";
+
+	myStrncat(str1, str2, 5);
+	puts(str1); // First stringSecon
+	myStrcat(str1, str2);
+	puts(str1); // First stringSeconSecond string
+
+
+	printf("%d\n", myStrncmp("Banana", "Bananas", 6)); // 0
+	printf("%d\n", myStrcmp("Hello", "Hello")); // 0
+	printf("%d\n", myStrcmp("A", "B")); // -1
+	printf("%d\n", myStrcmp("B", "A")); // 1
+
 	return 0;
 }
 
@@ -71,4 +91,56 @@ void FitStr(char* str, unsigned int n)
 	}
 
 	*(str + n) = '\0';
+}
+
+char* myStrncat(char* destination, char* source, size_t count)
+{
+	int destLen = strlen(destination);
+	int srcLen = strlen(source);
+
+	if (count > srcLen)
+	{
+		count = srcLen;
+	}
+
+	for (int i = 0; i < count; ++i)
+	{
+		destination[destLen + i] = source[i];
+	}
+
+	return destination;
+}
+
+char* myStrcat(char* destination, char* source)
+{
+	return myStrncat(destination, source, strlen(source));
+}
+
+int myStrncmp(char* str1, char* str2, size_t maxCount)
+{
+	int i = 0;
+
+	while ((str1[i] != '\0' || str2[i] != '\0') && i < maxCount)
+	{
+		if (str1[i] > str2[i])
+		{
+			return 1;
+		}
+		else if (str1[i] < str2[i])
+		{
+			return -1;
+		}
+		++i;
+	}
+
+	return 0;
+}
+
+int myStrcmp(char* str1, char* str2)
+{
+	int str1Len = strlen(str1);
+	int str2Len = strlen(str2);
+	int maxLen = (str1Len > str2Len) ? str1Len : str2Len;
+
+	return myStrncmp(str1, str2, maxLen);
 }
