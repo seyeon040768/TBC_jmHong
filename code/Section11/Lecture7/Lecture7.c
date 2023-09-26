@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 void Swap(int* x, int* y);
-void PrintArray(int arr[], int size);
 void SelectionSort(int arr[], int n);
+void PrintArray(int arr[], int size);
 
 int main(void)
 {
@@ -23,15 +23,6 @@ void Swap(int* x, int* y)
 	*y = temp;
 }
 
-void PrintArray(int arr[], int size)
-{
-	for (int i = 0; i < size; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
-}
-
 void SelectionSort(int arr[], int n)
 {
 	int minIndex;
@@ -48,4 +39,13 @@ void SelectionSort(int arr[], int n)
 		}
 		Swap(&arr[i], &arr[minIndex]);
 	}
+}
+
+void PrintArray(int arr[], int size)
+{
+	for (int i = 0; i < size; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
 }
