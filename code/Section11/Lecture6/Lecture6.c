@@ -108,6 +108,8 @@ char* myStrncat(char* destination, char* source, size_t count)
 		destination[destLen + i] = source[i];
 	}
 
+	destination[destLen + count] = '\0';
+
 	return destination;
 }
 
