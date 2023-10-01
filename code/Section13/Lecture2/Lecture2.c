@@ -29,8 +29,9 @@ int main(int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	while ((ch = fgetc(fr)) != EOF)
+	while ((ch = fgetc(fr)) != EOF) // getc(fr)
 	{
+		//putc(ch, stdout); // same as putchar(ch);
 		fputc(ch, stdout);
 
 		fputc(ch, fw);
