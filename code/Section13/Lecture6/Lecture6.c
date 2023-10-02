@@ -46,5 +46,7 @@ int main(void)
 	fgetpos(fp, &pt);
 	printf("%lld\n", pt); // 11
 
+	fclose(fp);
+
 	return 0;
 }
