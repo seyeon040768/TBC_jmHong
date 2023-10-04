@@ -36,12 +36,25 @@ int main(void)
 		.minutes = 30
 	};
 
-	printf("Dear %s %s,\n", res.guest.given, res.guest.family);
+	char* formatted = "\
+Dear %s %s,\n\
+I would like to serve you %s\n\
+Please visit %s one %d/%d/%d at %d:%d.\n\
+Sincerely,\n\
+%s %s\n";
+
+	printf(formatted,
+		res.guest.given, res.guest.family,
+		res.food,
+		res.place, res.day, res.month, res.year, res.hours, res.minutes,
+		res.host.given, res.host.family);
+
+	/*printf("Dear %s %s,\n", res.guest.given, res.guest.family);
 	printf("I would like to serve you %s\n", res.food);
 	printf("Please visit %s one %d/%d/%d at %d:%d.\n",
 		res.place, res.day, res.month, res.year, res.hours, res.minutes);
 	printf("Sincerely,\n");
-	printf("%s %s\n", res.host.given, res.host.family);
+	printf("%s %s\n", res.host.given, res.host.family);*/
 
 	return 0;
 }
