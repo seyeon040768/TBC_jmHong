@@ -59,7 +59,7 @@ int main(void)
 
 		printf("Input the price.\n");
 		printf(">>");
-		scanf("%f%*c", &library[count].price);
+		scanf("%f%*c", &library[count].price); // remove '\n'
 
 		++count;
 
