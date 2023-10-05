@@ -28,13 +28,25 @@ int main(void)
 
 void ReceiveInput(struct NameCount* userName)
 {
+	int flag;
+
 	printf("Input your first name:\n");
 	printf(">>");
-	s_gets(userName->first, NLEN);
+	// s_gets(userName->first, NLEN);
+	flag = scanf("%[^\n]%*c", userName->first);
+	if (flag != 1)
+	{
+		printf("Wrong input\n");
+	}
 
 	printf("Input your last name:\n");
 	printf(">>");
-	s_gets(userName->last, NLEN);
+	// s_gets(userName->last, NLEN);
+	flag = scanf("%[^\n]%*c", userName->last);
+	if (flag != 1)
+	{
+		printf("Wrong input\n");
+	}
 }
 
 void CountCharacters(struct NameCount* userName)
