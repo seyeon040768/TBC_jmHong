@@ -120,7 +120,7 @@ struct NameCount ReceiveInput()
 
 	printf("Input your first name:\n");
 	printf(">>");
-	// s_gets(userName->first, NLEN);
+	// s_gets(userName.first, NLEN);
 	flag = scanf("%[^\n]%*c", userName.first);
 	if (flag != 1)
 	{
@@ -129,7 +129,7 @@ struct NameCount ReceiveInput()
 
 	printf("Input your last name:\n");
 	printf(">>");
-	// s_gets(userName->last, NLEN);
+	// s_gets(userName.last, NLEN);
 	flag = scanf("%[^\n]%*c", userName.last);
 	if (flag != 1)
 	{
