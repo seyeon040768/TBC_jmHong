@@ -55,14 +55,14 @@ int main(void)
 	*pf2 = *pf; // Don't copy flexible members. Use memcpy() instead
 
 
-	struct NonFlex
+	/*struct NonFlex
 	{
 		size_t count;
 		double average;
 		double* values;
 	};
 
-	/*struct NonFlex* nf;
+	struct NonFlex* nf;
 	nf->values = (double*)malloc(n * sizeof(double));*/
 
 	free(pf);
