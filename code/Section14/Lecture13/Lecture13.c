@@ -20,6 +20,7 @@ int main(void)
 	{
 		exit(EXIT_FAILURE);
 	}
+
 	myBooks[0] = (struct Book){ "The Great Gatsby", "F. Scott Fitzgerald" };
 	myBooks[1] = (struct Book){ "Hamlet", "William Shakespeare" };
 	myBooks[2] = (struct Book){ "The Odyssey", "Homer" };
