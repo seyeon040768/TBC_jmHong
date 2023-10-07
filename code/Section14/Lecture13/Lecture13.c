@@ -34,6 +34,6 @@ void PrintBooks(const struct Book* books, int n)
 {
 	for (int i = 0; i < n; ++i)
 	{
-		printf("Book %d: \"%s\" written by \"%s\"\n", n + 1, books[i].name, books[i].author);
+		printf("Book %d: \"%s\" written by \"%s\"\n", i + 1, books[i].name, books[i].author);
 	}
 }
