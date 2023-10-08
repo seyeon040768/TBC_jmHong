@@ -2,7 +2,8 @@
 
 int main(void)
 {
-	union MyUnion {
+	union MyUnion 
+	{
 		int i;
 		double d;
 		char c;
