@@ -13,7 +13,7 @@ int main(void)
 	enum Spectrum color;
 	bool isColorFounded = false;
 
-	while (1)
+	while (true)
 	{
 		bool isColorFounded = false;
 
