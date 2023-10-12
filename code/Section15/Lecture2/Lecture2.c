@@ -35,7 +35,7 @@ unsigned char ToDecimal(const char bi[])
 		//num += (temp) * power;
 		//power *= 2;
 
-		num += temp * pow(2, bits - i);
+		num += temp * (unsigned char)pow(2, bits - i);
 	}
 
 	return num;
