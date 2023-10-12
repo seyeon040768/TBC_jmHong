@@ -1,4 +1,5 @@
 ﻿#include <stdio.h>
+#include <math.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -21,7 +22,9 @@ unsigned char ToDecimal(const char bi[])
 	unsigned char power = 1;
 	unsigned char num = 0;
 
-	for (size_t i = strlen(bi); i > 0; --i)
+	const size_t bits = strlen(bi);
+
+	for (size_t i = bits; i > 0; --i)
 	{
 		unsigned char temp = bi[i - 1] - '0';
 		if (temp != 0 && temp != 1)
@@ -29,8 +32,10 @@ unsigned char ToDecimal(const char bi[])
 			exit(EXIT_FAILURE);
 		}
 
-		num += (bi[i - 1] - '0') * power;
-		power *= 2;
+		//num += (temp) * power;
+		//power *= 2;
+
+		num += temp * pow(2, bits - i);
 	}
 
 	return num;
