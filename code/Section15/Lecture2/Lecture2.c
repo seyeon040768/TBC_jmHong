@@ -32,7 +32,7 @@ unsigned char ToDecimal(const char bi[])
 			exit(EXIT_FAILURE);
 		}
 
-		//num += (temp) * power;
+		//num += temp * power;
 		//power *= 2;
 
 		num += temp * (unsigned char)pow(2, bits - i);
