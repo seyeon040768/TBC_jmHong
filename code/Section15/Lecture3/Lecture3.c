@@ -2,7 +2,6 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 unsigned char ToDecimal(const char bi[]);
 void PrintBinary(const unsigned char num);
