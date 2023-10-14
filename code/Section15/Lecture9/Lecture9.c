@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdbool.h>
 
-struct
+struct Items
 {
 	bool hasSword : 1;
 	bool hasShield : 1;
@@ -11,11 +11,11 @@ struct
 	bool hasKey : 1;
 	bool hasRing : 1;
 	bool hasAmulet : 1;
-} ItemsFlag;
+} itemsFlag;
 
 int main(void)
 {
-	ItemsFlag.hasSword = 1;
+	itemsFlag.hasSword = 1;
 
 	return 0;
 }
