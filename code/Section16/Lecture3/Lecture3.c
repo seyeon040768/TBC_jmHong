@@ -20,7 +20,7 @@ Macro expansion
 but in rising every time we fall."
 
 #define NINE THREE*THREE
-#define SAY_HELLO printf("Hello, World!\n");
+#define SAY_HELLO for (int i = 0; i < 10; ++i) printf("Hello, World!\n");
 #define FORMAT "Number is %d.\n"
 
 #define MY_CH 'Z'
