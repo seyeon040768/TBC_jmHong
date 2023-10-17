@@ -5,6 +5,11 @@
 // ...: ellipses
 // __VA_ARGS: one of the predefined macro
 
+/*
+printf(...)
+stdvar.h Variadic arguments
+*/
+
 int main(void)
 {
 	double x = 48;
