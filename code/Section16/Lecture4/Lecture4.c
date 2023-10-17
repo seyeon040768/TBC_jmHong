@@ -9,8 +9,8 @@
 #define PRINT_SQR1(X) printf("The square of %d is %d.\n", X, SQUARE2(X))
 #define PRINT_SQR2(X) printf("The square of " #X " is %d.\n", SQUARE2(X))
 
-#define XNAME(N) x ## N
-#define PRT_XN(N) printf("x" #N " = %d\n", x ## N);
+#define XNAME(N) x##N
+#define PRT_XN(N) printf("x" #N " = %d\n", x##N);
 
 int main(void)
 {
