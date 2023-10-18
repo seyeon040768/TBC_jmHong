@@ -16,12 +16,12 @@ int main(void)
 
 	DifferentFuncInDifferentFile();
 
-#line 7
-	printf("__LINE__ after #line %d\n", __LINE__);
-
-#line 1 "hello.txt"
-	printf("__LINE__ after #line %d\n", __LINE__);
-	printf("__FILE__: %s\n", __FILE__);
+//#line 7
+//	printf("__LINE__ after #line %d\n", __LINE__); // 7
+//
+//#line 1 "hello.txt"
+//	printf("__LINE__ after #line %d\n", __LINE__); // 8
+//	printf("__FILE__: %s\n", __FILE__);
 
 #if __LINE__ != 26
 #error Not line 33
