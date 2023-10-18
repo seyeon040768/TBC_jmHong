@@ -23,6 +23,10 @@ int main(void)
 	printf("__LINE__ after #line %d\n", __LINE__);
 	printf("__FILE__: %s\n", __FILE__);
 
+#if __LINE__ != 26
+#error Not line 33
+#endif
+
 	return 0;
 }
 
