@@ -1,4 +1,4 @@
-﻿// unable to run in VSC
+﻿// unable to run in Visual C
 
 #include <stdio.h>
 #include <stdalign.h>
