@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <assert.h>
+#include <assert.h> // assert, static_assert
 
 int Divide(int a, int b);
 
