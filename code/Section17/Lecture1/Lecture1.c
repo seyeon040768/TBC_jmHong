@@ -25,6 +25,7 @@ int main(void)
 	int moviesCount, selectedMenu, selectedIndex;
 	char** movieNames;
 	float* movieStars;
+	int isQuit = 0;
 
 	printf("Please input filename to read and press Enter.\n");
 	printf("%s ", PROMPT);
@@ -62,61 +63,86 @@ int main(void)
 		fscanf(fp, "%f%*c", movieStars + i);
 	}
 
-	printf("Please select an option and press enter.\n");
-	printf("1. Print all items\t2. Print an item\n");
-	printf("3. Edit an item\t\t4. Add an item\n");
-	printf("5. Insert an item\t6. Delete an item\n");
-	printf("7. Delete all items\t8. Save file\n");
-	printf("9. Search by name\t10. Quit\n");
-	printf("%s ", PROMPT);
-	scanf("%d", &selectedMenu);
-
-	switch (selectedMenu)
+	while (!isQuit)
 	{
-	case PrintAllItmes:
-		for (int i = 0; i < moviesCount; ++i)
-		{
-			printf("%d: \"%s\", %.1f\n", i, movieNames[i], movieStars[i]);
-		}
-		break;
-	case PrintAnItem:
-		printf("Input the index of item to print.\n");
+		printf("Please select an option and press enter.\n");
+		printf("1. Print all items\t2. Print an item\n");
+		printf("3. Edit an item\t\t4. Add an item\n");
+		printf("5. Insert an item\t6. Delete an item\n");
+		printf("7. Delete all items\t8. Save file\n");
+		printf("9. Search by name\t10. Quit\n");
 		printf("%s ", PROMPT);
-		scanf("%d", &selectedIndex);
+		scanf("%d", &selectedMenu);
 
-		if (selectedIndex < 0 || selectedIndex >= moviesCount)
+		switch (selectedMenu)
 		{
-			printf("Invalid item.\n");
+		case PrintAllItmes:
+			for (int i = 0; i < moviesCount; ++i)
+			{
+				printf("%d: \"%s\", %.1f\n", i, movieNames[i], movieStars[i]);
+			}
+			break;
+		case PrintAnItem:
+			printf("Input the index of item to print.\n");
+			printf("%s ", PROMPT);
+			scanf("%d", &selectedIndex);
+
+			if (selectedIndex < 0 || selectedIndex >= moviesCount)
+			{
+				printf("Invalid item.\n");
+				break;
+			}
+
+			printf("%d: \"%s\", %.1f\n",
+				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+			break;
+		case EditAnItem:
+			printf("Input the index of item to edit.\n");
+			printf("%s ", PROMPT);
+			scanf("%d%*c", &selectedIndex);
+
+			if (selectedIndex < 0 || selectedIndex >= moviesCount)
+			{
+				printf("Invalid item.\n");
+				break;
+			}
+
+			printf("%d: \"%s\", %.1f\n",
+				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+
+			printf("Input new title and press enter.\n");
+			printf("%s ", PROMPT);
+			scanf("%[^\n]%*c", movieNames[selectedIndex]);
+
+			printf("Input new rating and press enter.\n");
+			printf("%s ", PROMPT);
+			scanf("%f", movieStars + selectedIndex);
+
+			printf("%d: \"%s\", %.1f\n",
+				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+			break;
+		case AddAnItem:
+
+			break;
+		case InsertAnItem:
+
+			break;
+		case DeleteAnItem:
+
+			break;
+		case DeleteAllItems:
+
+			break;
+		case SaveFile:
+
+			break;
+		case SearchByName:
+
+			break;
+		case Quit:
+			isQuit = 1;
 			break;
 		}
-
-		printf("%d: \"%s\", %.1f\n",
-			selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
-		break;
-	case EditAnItem:
-
-		break;
-	case AddAnItem:
-
-		break;
-	case InsertAnItem:
-
-		break;
-	case DeleteAnItem:
-
-		break;
-	case DeleteAllItems:
-
-		break;
-	case SaveFile:
-
-		break;
-	case SearchByName:
-
-		break;
-	case Quit:
-
-		break;
 	}
 
 	return 0;
