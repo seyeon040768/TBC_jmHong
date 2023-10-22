@@ -43,6 +43,13 @@ int main(void)
 	{
 		exit(EXIT_FAILURE);
 	}
+	for (int i = 0; i < moviesCount; ++i)
+	{
+		if ((movieNames[i] = (char*)malloc(100 * sizeof(char))) == NULL)
+		{
+			exit(EXIT_FAILURE);
+		}
+	}
 	if ((movieStars = (float*)malloc(moviesCount * sizeof(float))) == NULL)
 	{
 		exit(EXIT_FAILURE);
@@ -50,11 +57,7 @@ int main(void)
 
 	for (int i = 0; i < moviesCount; ++i)
 	{
-		char temp[100] = { '\0', };
-		fscanf(fp, "%[^\n]s%*c", temp);
-
-		movieNames[i] = (char*)malloc((strlen(temp) + 1) * sizeof(char));
-		memcpy(movieNames[i], temp, strlen(temp) + 1);
+		fscanf(fp, "%[^\n]s%*c", movieNames[i]);
 
 		fscanf(fp, "%f%*c", movieStars + i);
 	}
@@ -91,7 +94,7 @@ int main(void)
 			selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
 		break;
 	case EditAnItem:
-		
+
 		break;
 	case AddAnItem:
 
