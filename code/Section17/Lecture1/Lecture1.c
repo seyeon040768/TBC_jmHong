@@ -22,7 +22,7 @@ int main(void)
 {
 	char filename[100] = { '\0',};
 	FILE* fp;
-	int moviesCount, selectedMenu, selelctedIndex;
+	int moviesCount, selectedMenu, selectedIndex;
 	char** movieNames;
 	float* movieStars;
 
@@ -79,13 +79,19 @@ int main(void)
 	case PrintAnItem:
 		printf("Input the index of item to print.\n");
 		printf("%s ", PROMPT);
-		scanf("%d", &selelctedIndex);
+		scanf("%d", &selectedIndex);
+
+		if (selectedIndex < 0 || selectedIndex >= moviesCount)
+		{
+			printf("Invalid item.\n");
+			break;
+		}
 
 		printf("%d: \"%s\", %.1f\n",
-			selelctedIndex, movieNames[selelctedIndex], movieStars[selelctedIndex]);
+			selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
 		break;
 	case EditAnItem:
-
+		
 		break;
 	case AddAnItem:
 
