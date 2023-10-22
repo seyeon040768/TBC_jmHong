@@ -77,7 +77,12 @@ int main(void)
 		}
 		break;
 	case PrintAnItem:
+		printf("Input the index of item to print.\n");
+		printf("%s ", PROMPT);
+		scanf("%d", &selelctedIndex);
 
+		printf("%d: \"%s\", %.1f\n",
+			selelctedIndex, movieNames[selelctedIndex], movieStars[selelctedIndex]);
 		break;
 	case EditAnItem:
 
