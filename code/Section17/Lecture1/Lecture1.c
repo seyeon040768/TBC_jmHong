@@ -163,7 +163,60 @@ int main(void)
 				moviesCount - 1, movieNames[moviesCount - 1], movieStars[moviesCount - 1]);
 			break;
 		case InsertAnItem:
+			printf("Input the index of item to insert.\n");
+			printf("%s ", PROMPT);
+			scanf("%d%*c", &selectedIndex);
 
+			if (selectedIndex < 0 || selectedIndex >= moviesCount)
+			{
+				printf("Invalid index.\n");
+				break;
+			}
+
+			++moviesCount;
+
+			if ((namesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
+			if ((starsTemp = (float*)malloc(moviesCount * sizeof(float))) == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
+			for (int i = 0; i < selectedIndex; ++i)
+			{
+				namesTemp[i] = movieNames[i];
+				starsTemp[i] = movieStars[i];
+			}
+			for (int i = selectedIndex + 1; i < moviesCount; ++i)
+			{
+				namesTemp[i] = movieNames[i - 1];
+				starsTemp[i] = movieStars[i - 1];
+			}
+			if ((namesTemp[selectedIndex] = (char*)malloc(100 * sizeof(char))) == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
+
+			free(movieNames);
+			free(movieStars);
+
+			printf("Input title and press enter.\n");
+			printf("%s ", PROMPT);
+			scanf("%[^\n]%*c", namesTemp[selectedIndex]);
+
+			printf("Input rating and press enter.\n");
+			printf("%s ", PROMPT);
+			scanf("%f%*c", starsTemp + selectedIndex);
+
+			movieNames = namesTemp;
+			movieStars = starsTemp;
+
+			namesTemp = NULL;
+			starsTemp = NULL;
+
+			printf("%d: \"%s\", %.1f\n",
+				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
 			break;
 		case DeleteAnItem:
 
@@ -182,6 +235,15 @@ int main(void)
 			break;
 		}
 	}
+
+	fclose(fp);
+
+	for (int i = 0; i < moviesCount; ++i)
+	{
+		free(movieNames[i]);
+	}
+	free(movieNames);
+	free(movieStars);
 
 	return 0;
 }
