@@ -262,6 +262,17 @@ int main(void)
 
 			break;
 		case DeleteAllItems:
+			for (int i = 0; i < moviesCount; ++i)
+			{
+				free(movieNames[i]);
+			}
+			free(movieNames);
+			free(movieStars);
+
+			movieNames = NULL;
+			movieStars = NULL;
+
+			moviesCount = 0;
 
 			break;
 		case SaveFile:
