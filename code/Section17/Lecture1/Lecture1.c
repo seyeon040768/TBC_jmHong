@@ -219,6 +219,46 @@ int main(void)
 				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
 			break;
 		case DeleteAnItem:
+			printf("Input the index of item to delete.\n");
+			printf("%s ", PROMPT);
+			scanf("%d%*c", &selectedIndex);
+
+			if (selectedIndex < 0 || selectedIndex >= moviesCount)
+			{
+				printf("Invalid index.\n");
+				break;
+			}
+
+			--moviesCount;
+
+			if ((namesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
+			if ((starsTemp = (float*)malloc(moviesCount * sizeof(float))) == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
+			for (int i = 0; i < selectedIndex; ++i)
+			{
+				namesTemp[i] = movieNames[i];
+				starsTemp[i] = movieStars[i];
+			}
+			for (int i = selectedIndex + 1; i < moviesCount + 1; ++i)
+			{
+				namesTemp[i - 1] = movieNames[i];
+				starsTemp[i - 1] = movieStars[i];
+			}
+
+			free(movieNames[selectedIndex]);
+			free(movieNames);
+			free(movieStars);
+
+			movieNames = namesTemp;
+			movieStars = starsTemp;
+
+			namesTemp = NULL;
+			starsTemp = NULL;
 
 			break;
 		case DeleteAllItems:
