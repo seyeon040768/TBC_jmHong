@@ -35,7 +35,7 @@ int main(void)
 
 	while (true)
 	{
-		bool isFounded = false;
+		bool isFound = false;
 
 		printf("Choose an option:\n");
 		printf("%c) to upper\n", options[0]);
@@ -52,12 +52,12 @@ int main(void)
 			if (option == options[i])
 			{
 				(*operations[i])(input);
-				isFounded = true;
+				isFound = true;
 				break;
 			}
 		}
 
-		if (isFounded)
+		if (isFound)
 		{
 			break;
 		}
