@@ -26,7 +26,8 @@ int main(void)
 	char** movieNames, ** namesTemp;
 	float* movieStars, * starsTemp;
 	char saveFilename[100] = { '\0', };
-	int isQuit = 0;
+	char movieNameForSearch[100] = { '\0', };
+	int quit = 0, foundMovieByName = 0;
 
 	printf("Please input filename to read and press Enter.\n");
 	printf("%s ", PROMPT);
@@ -64,7 +65,7 @@ int main(void)
 		fscanf(fp, "%f%*c", movieStars + i);
 	}
 
-	while (!isQuit)
+	while (!quit)
 	{
 		printf("\nPlease select an option and press enter.\n");
 		printf("1. Print all items\t2. Print an item\n");
@@ -299,10 +300,31 @@ int main(void)
 			printf("%d items have been saved to the file.\n", moviesCount);
 			break;
 		case SearchByName:
+			printf("Input title to search and press enter.\n");
+			printf("%s ", PROMPT);
+			scanf("%[^\n]%*c", movieNameForSearch);
 
+			for (int i = 0; i < moviesCount; ++i)
+			{
+				if (!strcmp(movieNameForSearch, movieNames[i]))
+				{
+					printf("%d: \"%s\", %.1f\n",
+						i, movieNames[i], movieStars[i]);
+					
+					foundMovieByName = 1;
+					break;
+				}
+			}
+
+			if (!foundMovieByName)
+			{
+				printf("No movie found: %s\n", movieNameForSearch);
+			}
+
+			foundMovieByName = 0;
 			break;
 		case Quit:
-			isQuit = 1;
+			quit = 1;
 			break;
 		}
 	}
