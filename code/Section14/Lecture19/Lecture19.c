@@ -15,7 +15,7 @@ int main(void)
 
 	while (true)
 	{
-		bool isColorFounded = false;
+		bool isColorFound = false;
 
 		printf("Input a color name (empty line to quit):\n");
 
@@ -41,12 +41,12 @@ int main(void)
 		{
 			if (strcmp(choice, colors[color]) == 0)
 			{
-				isColorFounded = true;
+				isColorFound = true;
 				break;
 			}
 		}
 
-		if (isColorFounded)
+		if (isColorFound)
 		{
 			switch (color)
 			{
