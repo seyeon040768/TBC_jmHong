@@ -21,10 +21,11 @@ enum Menu
 int main(void)
 {
 	char filename[100] = { '\0',};
-	FILE* fp;
+	FILE* fp, *fSave;
 	int moviesCount, selectedMenu, selectedIndex;
 	char** movieNames, ** namesTemp;
 	float* movieStars, * starsTemp;
+	char saveFilename[100] = { '\0', };
 	int isQuit = 0;
 
 	printf("Please input filename to read and press Enter.\n");
@@ -276,7 +277,26 @@ int main(void)
 
 			break;
 		case SaveFile:
+			printf("Please input filename to write and press Enter.\n");
+			printf("%s ", PROMPT);
+			scanf("%[^\n]%*c", saveFilename);
 
+			if ((fSave = fopen(saveFilename, "w")) == NULL)
+			{
+				printf("ERROR: Cannot open file.\n");
+				exit(EXIT_FAILURE);
+			}
+
+			fprintf(fSave, "%d\n", moviesCount);
+
+			for (int i = 0; i < moviesCount; ++i)
+			{
+				fprintf(fSave, "%s\n%.1f\n", movieNames[i], movieStars[i]);
+			}
+
+			fclose(fSave);
+
+			printf("%d items have been saved to the file.\n", moviesCount);
 			break;
 		case SearchByName:
 
