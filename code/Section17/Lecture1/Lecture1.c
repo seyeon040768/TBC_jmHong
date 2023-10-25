@@ -18,31 +18,50 @@ enum Menu
 	Quit
 };
 
-char** ChangeLength(char** movieNames, int moviesCount, int pivot)
+enum ChangeLengthMode
 {
+	Init,
+	Add,
+	Delete
+};
+
+char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int mode)
+{
+	/*
+	* mode
+	* 0: init
+	* 1: add
+	* 2: delete
+	*/
+
 	char** namesTemp;
 	if ((namesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
 	{
 		exit(EXIT_FAILURE);
 	}
 
+	if (mode == Init)
+	{
+		return namesTemp;
+	}
+
 	for (int i = 0; i < pivot; ++i)
 	{
-		if ((namesTemp[i] = (char*)malloc(100 * sizeof(char))) == NULL)
-		{
-			exit(EXIT_FAILURE);
-		}
-
 		namesTemp[i] = movieNames[i];
 	}
-	for (int i = pivot + 1; i < moviesCount; ++i)
+	if (mode == Add)
 	{
-		if ((namesTemp[i] = (char*)malloc(100 * sizeof(char))) == NULL)
+		for (int i = pivot + 1; i < moviesCount; ++i)
 		{
-			exit(EXIT_FAILURE);
+			namesTemp[i] = movieNames[i - 1];
 		}
-
-		namesTemp[i] = movieNames[i - 1];
+	}
+	else if (mode == Delete)
+	{
+		for (int i = pivot; i < moviesCount; ++i)
+		{
+			namesTemp[i] = movieNames[i + 1];
+		}
 	}
 
 	free(movieNames);
@@ -167,7 +186,7 @@ int main(void)
 				starsTemp[i] = movieStars[i];
 			}
 
-			movieNames = ChangeLength(movieNames, moviesCount, moviesCount - 1);
+			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, moviesCount - 1);
 			if ((movieNames[moviesCount - 1] = (char*)malloc(100 * sizeof(char))) == NULL)
 			{
 				exit(EXIT_FAILURE);
@@ -217,7 +236,7 @@ int main(void)
 				starsTemp[i] = movieStars[i - 1];
 			}
 
-			movieNames = ChangeLength(movieNames, moviesCount, selectedIndex);
+			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, selectedIndex);
 			if ((movieNames[selectedIndex] = (char*)malloc(100 * sizeof(char))) == NULL)
 			{
 				exit(EXIT_FAILURE);
