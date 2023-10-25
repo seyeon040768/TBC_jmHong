@@ -42,6 +42,14 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 
 	if (mode == Init)
 	{
+		for (int i = 0; i < moviesCount; ++i)
+		{
+			if ((namesTemp[i] = (char*)malloc(100 * sizeof(char))) == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
+		}
+
 		return namesTemp;
 	}
 
@@ -62,6 +70,7 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 		{
 			namesTemp[i] = movieNames[i + 1];
 		}
+		free(movieNames[pivot]);
 	}
 
 	free(movieNames);
@@ -93,17 +102,7 @@ int main(void)
 	fscanf(fp, "%d%*c", &moviesCount);
 	printf("%d items have been read from the file.\n", moviesCount);
 
-	if ((movieNames = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
-	{
-		exit(EXIT_FAILURE);
-	}
-	for (int i = 0; i < moviesCount; ++i)
-	{
-		if ((movieNames[i] = (char*)malloc(100 * sizeof(char))) == NULL)
-		{
-			exit(EXIT_FAILURE);
-		}
-	}
+	movieNames = ChangeLengthMovieNames(NULL, moviesCount, -1, Init);
 	if ((movieStars = (float*)malloc(moviesCount * sizeof(float))) == NULL)
 	{
 		exit(EXIT_FAILURE);
@@ -186,7 +185,7 @@ int main(void)
 				starsTemp[i] = movieStars[i];
 			}
 
-			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, moviesCount - 1);
+			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, moviesCount - 1, Add);
 			if ((movieNames[moviesCount - 1] = (char*)malloc(100 * sizeof(char))) == NULL)
 			{
 				exit(EXIT_FAILURE);
@@ -236,7 +235,7 @@ int main(void)
 				starsTemp[i] = movieStars[i - 1];
 			}
 
-			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, selectedIndex);
+			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, selectedIndex, Add);
 			if ((movieNames[selectedIndex] = (char*)malloc(100 * sizeof(char))) == NULL)
 			{
 				exit(EXIT_FAILURE);
@@ -272,33 +271,25 @@ int main(void)
 
 			--moviesCount;
 
-			if ((namesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
-			{
-				exit(EXIT_FAILURE);
-			}
 			if ((starsTemp = (float*)malloc(moviesCount * sizeof(float))) == NULL)
 			{
 				exit(EXIT_FAILURE);
 			}
 			for (int i = 0; i < selectedIndex; ++i)
 			{
-				namesTemp[i] = movieNames[i];
 				starsTemp[i] = movieStars[i];
 			}
 			for (int i = selectedIndex + 1; i < moviesCount + 1; ++i)
 			{
-				namesTemp[i - 1] = movieNames[i];
 				starsTemp[i - 1] = movieStars[i];
 			}
 
-			free(movieNames[selectedIndex]);
-			free(movieNames);
+			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, selectedIndex, Delete);
+
 			free(movieStars);
 
-			movieNames = namesTemp;
 			movieStars = starsTemp;
 
-			namesTemp = NULL;
 			starsTemp = NULL;
 
 			break;
