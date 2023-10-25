@@ -18,6 +18,36 @@ enum Menu
 	Quit
 };
 
+char** ChangeLength(char** movieNames, int moviesCount, int pivot)
+{
+	char** namesTemp;
+	if ((namesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+
+	for (int i = 0; i < pivot; ++i)
+	{
+		if ((namesTemp[i] = (char*)malloc(100 * sizeof(char))) == NULL)
+		{
+			exit(EXIT_FAILURE);
+		}
+
+		namesTemp[i] = movieNames[i];
+	}
+	for (int i = pivot + 1; i < moviesCount; ++i)
+	{
+		if ((namesTemp[i] = (char*)malloc(100 * sizeof(char))) == NULL)
+		{
+			exit(EXIT_FAILURE);
+		}
+
+		namesTemp[i] = movieNames[i - 1];
+	}
+
+	return namesTemp;
+}
+
 int main(void)
 {
 	char filename[100] = { '\0',};
