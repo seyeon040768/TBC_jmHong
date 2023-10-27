@@ -27,7 +27,7 @@ enum ChangeLengthMode
 	Delete
 };
 
-char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int mode)
+char** ChangeLengthMovieTitles(char** movieTitles, int moviesCount, int pivot, int mode)
 {
 	/*
 	* mode
@@ -36,8 +36,8 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 	* 2: delete
 	*/
 
-	char** namesTemp;
-	if ((namesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
+	char** titlesTemp;
+	if ((titlesTemp = (char**)malloc(moviesCount * sizeof(char*))) == NULL)
 	{
 		exit(EXIT_FAILURE);
 	}
@@ -46,27 +46,27 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 	{
 		for (int i = 0; i < moviesCount; ++i)
 		{
-			if ((namesTemp[i] = (char*)malloc(TEXT_SIZE * sizeof(char))) == NULL)
+			if ((titlesTemp[i] = (char*)malloc(TEXT_SIZE * sizeof(char))) == NULL)
 			{
 				exit(EXIT_FAILURE);
 			}
 		}
 
-		return namesTemp;
+		return titlesTemp;
 	}
 
 	for (int i = 0; i < pivot; ++i)
 	{
-		namesTemp[i] = movieNames[i];
+		titlesTemp[i] = movieTitles[i];
 	}
 	if (mode == Add)
 	{
 		for (int i = pivot + 1; i < moviesCount; ++i)
 		{
-			namesTemp[i] = movieNames[i - 1];
+			titlesTemp[i] = movieTitles[i - 1];
 		}
 
-		if ((namesTemp[pivot] = (char*)malloc(TEXT_SIZE * sizeof(char))) == NULL)
+		if ((titlesTemp[pivot] = (char*)malloc(TEXT_SIZE * sizeof(char))) == NULL)
 		{
 			exit(EXIT_FAILURE);
 		}
@@ -75,17 +75,17 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 	{
 		for (int i = pivot; i < moviesCount; ++i)
 		{
-			namesTemp[i] = movieNames[i + 1];
+			titlesTemp[i] = movieTitles[i + 1];
 		}
-		free(movieNames[pivot]);
+		free(movieTitles[pivot]);
 	}
 
-	free(movieNames);
+	free(movieTitles);
 
-	return namesTemp;
+	return titlesTemp;
 }
 
-float* ChangeLengthMovieStars(float* movieStars, int moviesCount, int pivot, int mode)
+float* ChangeLengthMovieRatings(float* movieRatings, int moviesCount, int pivot, int mode)
 {
 	/*
 	* mode
@@ -94,39 +94,39 @@ float* ChangeLengthMovieStars(float* movieStars, int moviesCount, int pivot, int
 	* 2: delete
 	*/
 
-	float* starsTemp;
-	if ((starsTemp = (float*)malloc(moviesCount * sizeof(float))) == NULL)
+	float* ratingsTemp;
+	if ((ratingsTemp = (float*)malloc(moviesCount * sizeof(float))) == NULL)
 	{
 		exit(EXIT_FAILURE);
 	}
 
 	if (mode == Init)
 	{
-		return starsTemp;
+		return ratingsTemp;
 	}
 
 	for (int i = 0; i < pivot; ++i)
 	{
-		starsTemp[i] = movieStars[i];
+		ratingsTemp[i] = movieRatings[i];
 	}
 	if (mode == Add)
 	{
 		for (int i = pivot + 1; i < moviesCount; ++i)
 		{
-			starsTemp[i] = movieStars[i - 1];
+			ratingsTemp[i] = movieRatings[i - 1];
 		}
 	}
 	else if (mode == Delete)
 	{
 		for (int i = pivot; i < moviesCount; ++i)
 		{
-			starsTemp[i] = movieStars[i + 1];
+			ratingsTemp[i] = movieRatings[i + 1];
 		}
 	}
 
-	free(movieStars);
+	free(movieRatings);
 
-	return starsTemp;
+	return ratingsTemp;
 }
 
 int main(void)
@@ -134,8 +134,8 @@ int main(void)
 	char filename[TEXT_SIZE] = { '\0',};
 	FILE* fp, *fSave;
 	int moviesCount, selectedMenu, selectedIndex;
-	char** movieNames;
-	float* movieStars;
+	char** movieTitles;
+	float* movieRatings;
 	char saveFilename[TEXT_SIZE] = { '\0', };
 	char movieNameForSearch[TEXT_SIZE] = { '\0', };
 	int quit = 0, foundMovieByName = 0;
@@ -153,14 +153,14 @@ int main(void)
 	fscanf(fp, "%d%*c", &moviesCount);
 	printf("%d items have been read from the file.\n", moviesCount);
 
-	movieNames = ChangeLengthMovieNames(NULL, moviesCount, -1, Init);
-	movieStars = ChangeLengthMovieStars(NULL, moviesCount, -1, Init);
+	movieTitles = ChangeLengthMovieTitles(NULL, moviesCount, -1, Init);
+	movieRatings = ChangeLengthMovieRatings(NULL, moviesCount, -1, Init);
 
 	for (int i = 0; i < moviesCount; ++i)
 	{
-		fscanf(fp, "%[^\n]s%*c", movieNames[i]);
+		fscanf(fp, "%[^\n]s%*c", movieTitles[i]);
 
-		fscanf(fp, "%f%*c", movieStars + i);
+		fscanf(fp, "%f%*c", movieRatings + i);
 	}
 
 	while (!quit)
@@ -179,7 +179,7 @@ int main(void)
 		case PrintAllItmes:
 			for (int i = 0; i < moviesCount; ++i)
 			{
-				printf("%d: \"%s\", %.1f\n", i, movieNames[i], movieStars[i]);
+				printf("%d: \"%s\", %.1f\n", i, movieTitles[i], movieRatings[i]);
 			}
 			break;
 		case PrintAnItem:
@@ -194,7 +194,7 @@ int main(void)
 			}
 
 			printf("%d: \"%s\", %.1f\n",
-				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+				selectedIndex, movieTitles[selectedIndex], movieRatings[selectedIndex]);
 			break;
 		case EditAnItem:
 			printf("Input the index of item to edit.\n");
@@ -208,35 +208,35 @@ int main(void)
 			}
 
 			printf("%d: \"%s\", %.1f\n",
-				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+				selectedIndex, movieTitles[selectedIndex], movieRatings[selectedIndex]);
 
 			printf("Input new title and press enter.\n");
 			printf("%s ", PROMPT);
-			scanf("%[^\n]%*c", movieNames[selectedIndex]);
+			scanf("%[^\n]%*c", movieTitles[selectedIndex]);
 
 			printf("Input new rating and press enter.\n");
 			printf("%s ", PROMPT);
-			scanf("%f%*c", movieStars + selectedIndex);
+			scanf("%f%*c", movieRatings + selectedIndex);
 
 			printf("%d: \"%s\", %.1f\n",
-				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+				selectedIndex, movieTitles[selectedIndex], movieRatings[selectedIndex]);
 			break;
 		case AddAnItem:
 			++moviesCount;
 
-			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, moviesCount - 1, Add);
-			movieStars = ChangeLengthMovieStars(movieStars, moviesCount, moviesCount - 1, Add);
+			movieTitles = ChangeLengthMovieTitles(movieTitles, moviesCount, moviesCount - 1, Add);
+			movieRatings = ChangeLengthMovieRatings(movieRatings, moviesCount, moviesCount - 1, Add);
 
 			printf("Input title and press enter.\n");
 			printf("%s ", PROMPT);
-			scanf("%[^\n]%*c", movieNames[moviesCount - 1]);
+			scanf("%[^\n]%*c", movieTitles[moviesCount - 1]);
 
 			printf("Input rating and press enter.\n");
 			printf("%s ", PROMPT);
-			scanf("%f%*c", movieStars + moviesCount - 1);
+			scanf("%f%*c", movieRatings + moviesCount - 1);
 
 			printf("%d: \"%s\", %.1f\n",
-				moviesCount - 1, movieNames[moviesCount - 1], movieStars[moviesCount - 1]);
+				moviesCount - 1, movieTitles[moviesCount - 1], movieRatings[moviesCount - 1]);
 			break;
 		case InsertAnItem:
 			printf("Input the index of item to insert.\n");
@@ -251,19 +251,19 @@ int main(void)
 
 			++moviesCount;
 
-			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, selectedIndex, Add);
-			movieStars = ChangeLengthMovieStars(movieStars, moviesCount, selectedIndex, Add);
+			movieTitles = ChangeLengthMovieTitles(movieTitles, moviesCount, selectedIndex, Add);
+			movieRatings = ChangeLengthMovieRatings(movieRatings, moviesCount, selectedIndex, Add);
 
 			printf("Input title and press enter.\n");
 			printf("%s ", PROMPT);
-			scanf("%[^\n]%*c", movieNames[selectedIndex]);
+			scanf("%[^\n]%*c", movieTitles[selectedIndex]);
 
 			printf("Input rating and press enter.\n");
 			printf("%s ", PROMPT);
-			scanf("%f%*c", movieStars + selectedIndex);
+			scanf("%f%*c", movieRatings + selectedIndex);
 
 			printf("%d: \"%s\", %.1f\n",
-				selectedIndex, movieNames[selectedIndex], movieStars[selectedIndex]);
+				selectedIndex, movieTitles[selectedIndex], movieRatings[selectedIndex]);
 			break;
 		case DeleteAnItem:
 			printf("Input the index of item to delete.\n");
@@ -278,20 +278,20 @@ int main(void)
 
 			--moviesCount;
 
-			movieNames = ChangeLengthMovieNames(movieNames, moviesCount, selectedIndex, Delete);
-			movieStars = ChangeLengthMovieStars(movieStars, moviesCount, selectedIndex, Delete);
+			movieTitles = ChangeLengthMovieTitles(movieTitles, moviesCount, selectedIndex, Delete);
+			movieRatings = ChangeLengthMovieRatings(movieRatings, moviesCount, selectedIndex, Delete);
 
 			break;
 		case DeleteAllItems:
 			for (int i = 0; i < moviesCount; ++i)
 			{
-				free(movieNames[i]);
+				free(movieTitles[i]);
 			}
-			free(movieNames);
-			free(movieStars);
+			free(movieTitles);
+			free(movieRatings);
 
-			movieNames = NULL;
-			movieStars = NULL;
+			movieTitles = NULL;
+			movieRatings = NULL;
 
 			moviesCount = 0;
 
@@ -311,7 +311,7 @@ int main(void)
 
 			for (int i = 0; i < moviesCount; ++i)
 			{
-				fprintf(fSave, "%s\n%.1f\n", movieNames[i], movieStars[i]);
+				fprintf(fSave, "%s\n%.1f\n", movieTitles[i], movieRatings[i]);
 			}
 
 			fclose(fSave);
@@ -325,10 +325,10 @@ int main(void)
 
 			for (int i = 0; i < moviesCount; ++i)
 			{
-				if (!strcmp(movieNameForSearch, movieNames[i]))
+				if (!strcmp(movieNameForSearch, movieTitles[i]))
 				{
 					printf("%d: \"%s\", %.1f\n",
-						i, movieNames[i], movieStars[i]);
+						i, movieTitles[i], movieRatings[i]);
 					
 					foundMovieByName = 1;
 					break;
@@ -352,10 +352,10 @@ int main(void)
 
 	for (int i = 0; i < moviesCount; ++i)
 	{
-		free(movieNames[i]);
+		free(movieTitles[i]);
 	}
-	free(movieNames);
-	free(movieStars);
+	free(movieTitles);
+	free(movieRatings);
 
 	return 0;
 }
