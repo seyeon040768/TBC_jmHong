@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TEST_SIZE TEST_SIZE
+#define TEXT_SIZE 100
 
 #define PROMPT ">>"
 
@@ -46,7 +46,7 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 	{
 		for (int i = 0; i < moviesCount; ++i)
 		{
-			if ((namesTemp[i] = (char*)malloc(TEST_SIZE * sizeof(char))) == NULL)
+			if ((namesTemp[i] = (char*)malloc(TEXT_SIZE * sizeof(char))) == NULL)
 			{
 				exit(EXIT_FAILURE);
 			}
@@ -66,7 +66,7 @@ char** ChangeLengthMovieNames(char** movieNames, int moviesCount, int pivot, int
 			namesTemp[i] = movieNames[i - 1];
 		}
 
-		if ((namesTemp[pivot] = (char*)malloc(TEST_SIZE * sizeof(char))) == NULL)
+		if ((namesTemp[pivot] = (char*)malloc(TEXT_SIZE * sizeof(char))) == NULL)
 		{
 			exit(EXIT_FAILURE);
 		}
@@ -131,13 +131,13 @@ float* ChangeLengthMovieStars(float* movieStars, int moviesCount, int pivot, int
 
 int main(void)
 {
-	char filename[TEST_SIZE] = { '\0',};
+	char filename[TEXT_SIZE] = { '\0',};
 	FILE* fp, *fSave;
 	int moviesCount, selectedMenu, selectedIndex;
 	char** movieNames;
 	float* movieStars;
-	char saveFilename[TEST_SIZE] = { '\0', };
-	char movieNameForSearch[TEST_SIZE] = { '\0', };
+	char saveFilename[TEXT_SIZE] = { '\0', };
+	char movieNameForSearch[TEXT_SIZE] = { '\0', };
 	int quit = 0, foundMovieByName = 0;
 
 	printf("Please input filename to read and press Enter.\n");
