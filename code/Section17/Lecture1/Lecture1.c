@@ -80,7 +80,7 @@ int main(void)
 	Movie* movieArray;
 	char saveFilename[TEXT_SIZE] = { '\0', };
 	char movieNameForSearch[TEXT_SIZE] = { '\0', };
-	int quit = 0, foundMovieByName = 0;
+	int foundMovieByName = 0;
 
 	printf("Please input filename to read and press Enter.\n");
 	printf("%s ", PROMPT);
@@ -105,7 +105,7 @@ int main(void)
 		fscanf(fp, "%f%*c", &movieArray[i].rating);
 	}
 
-	while (!quit)
+	while (1)
 	{
 		printf("\nPlease select an option and press enter.\n");
 		printf("1. Print all items\t2. Print an item\n");
@@ -276,7 +276,7 @@ int main(void)
 			foundMovieByName = 0;
 			break;
 		case Quit:
-			quit = 1;
+			exit(0);
 			break;
 		}
 	}
