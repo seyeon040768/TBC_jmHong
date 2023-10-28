@@ -92,7 +92,11 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	fscanf(fp, "%zd%*c", &movieCount);
+	if (fscanf(fp, "%zd%*c", &movieCount) != 1)
+	{
+		printf("ERROR: Wrong Format.\n");
+		exit(EXIT_FAILURE);
+	}
 
 	movieArray = ChangeLength(Init, NULL, movieCount, -1);
 
@@ -100,9 +104,11 @@ int main(void)
 
 	for (int i = 0; i < movieCount; ++i)
 	{
-		fscanf(fp, "%[^\n]s%*c", movieArray[i].title);
-
-		fscanf(fp, "%f%*c", &movieArray[i].rating);
+		if (fscanf(fp, "%[^\n]s%*c", movieArray[i].title) != 1 || fscanf(fp, "%f%*c", &movieArray[i].rating) != 1)
+		{
+			printf("ERROR: Wrong Format.\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	while (1)
