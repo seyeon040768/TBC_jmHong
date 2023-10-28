@@ -111,6 +111,8 @@ int main(void)
 		}
 	}
 
+	fclose(fp);
+
 	while (1)
 	{
 		printf("\nPlease select an option and press enter.\n");
@@ -282,14 +284,12 @@ int main(void)
 			foundMovieByName = 0;
 			break;
 		case Quit:
+			free(movieArray);
+
 			exit(0);
 			break;
 		}
 	}
-
-	fclose(fp);
-
-	free(movieArray);
 
 	return 0;
 }
