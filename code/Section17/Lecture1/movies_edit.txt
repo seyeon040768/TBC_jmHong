@@ -12,4 +12,4 @@ The Dark Knight
 Wonder Woman
 7.4
 Test
-4.5
+10.0
