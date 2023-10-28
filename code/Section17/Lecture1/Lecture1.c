@@ -33,7 +33,7 @@ enum ChangeLengthMode
 	Delete
 };
 
-Movie* ChangeLength(int mode, Movie* MovieArray, int movieCount, int pivot)
+Movie* ChangeLength(int mode, Movie* MovieArray, size_t movieCount, int pivot)
 {
 	Movie* movieTemp;
 	if ((movieTemp = (Movie*)malloc(movieCount * sizeof(Movie))) == NULL)
@@ -75,7 +75,8 @@ int main(void)
 {
 	char filename[TEXT_SIZE] = { '\0',};
 	FILE* fp, *fSave;
-	int movieCount, selectedMenu, selectedIndex;
+	size_t movieCount;
+	int selectedMenu, selectedIndex;
 	Movie* movieArray;
 	char saveFilename[TEXT_SIZE] = { '\0', };
 	char movieNameForSearch[TEXT_SIZE] = { '\0', };
@@ -91,10 +92,11 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	fscanf(fp, "%d%*c", &movieCount);
-	printf("%d items have been read from the file.\n", movieCount);
+	fscanf(fp, "%zd%*c", &movieCount);
 
 	movieArray = ChangeLength(Init, NULL, movieCount, -1);
+
+	printf("%d items have been read from the file.\n", movieCount);
 
 	for (int i = 0; i < movieCount; ++i)
 	{
