@@ -51,5 +51,12 @@ int main(void)
 	newNode->value = 2;
 	newNode->next = NULL;
 
+	/* Add front */
+	struct Node* temp = head;
+	head = newNode;
+	newNode->next = temp;
+
+	PrintAll(head);
+
 	return 0;
 }
