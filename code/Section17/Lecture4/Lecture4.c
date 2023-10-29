@@ -79,5 +79,40 @@ int main(void)
 
 	PrintAll(head);
 
+
+	/* Find ad delete an item */
+	search = head;
+	struct Node* prev = NULL;
+
+	int count = 0;
+	while (search != NULL)
+	{
+		if (search->value == 1)
+		{
+			break;
+		}
+
+		prev = search;
+		search = search->next;
+		++count;
+	}
+
+	if (search == NULL)
+	{
+		printf("Wrong value.\n");
+		return;
+	}
+	else if (prev == NULL)
+	{
+		head = search->next;
+	}
+	else
+	{
+		prev->next = search->next;
+	}
+	free(search);
+
+	PrintAll(head);
+
 	return 0;
 }
