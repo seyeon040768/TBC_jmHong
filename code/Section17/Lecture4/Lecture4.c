@@ -58,5 +58,26 @@ int main(void)
 
 	PrintAll(head);
 
+
+	newNode = (struct Node*)malloc(sizeof(struct Node));
+	if (newNode == NULL)
+	{
+		printf("ERROR: malloc failed.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	newNode->value = 3;
+	newNode->next = NULL;
+
+	/* Add back */
+	struct Node* search = head;
+	while (search->next != NULL)
+	{
+		search = search->next;
+	}
+	search->next = newNode;
+
+	PrintAll(head);
+
 	return 0;
 }
