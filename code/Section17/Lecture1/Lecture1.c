@@ -100,7 +100,6 @@ int main(void)
 
 	movieArray = ChangeLength(Init, NULL, movieCount, -1);
 
-	printf("%d items have been read from the file.\n", movieCount);
 
 	for (int i = 0; i < movieCount; ++i)
 	{
@@ -110,6 +109,8 @@ int main(void)
 			exit(EXIT_FAILURE);
 		}
 	}
+
+	printf("%zd items have been read from the file.\n", movieCount);
 
 	fclose(fp);
 
@@ -184,7 +185,7 @@ int main(void)
 			printf("%s ", PROMPT);
 			scanf("%f%*c", &movieArray[movieCount - 1].rating);
 
-			printf("%d: \"%s\", %.1f\n",
+			printf("%zd: \"%s\", %.1f\n",
 				movieCount - 1, movieArray[movieCount - 1].title, movieArray[movieCount - 1].rating);
 			break;
 		case InsertAnItem:
@@ -248,7 +249,7 @@ int main(void)
 				exit(EXIT_FAILURE);
 			}
 
-			fprintf(fSave, "%d\n", movieCount);
+			fprintf(fSave, "%zd\n", movieCount);
 
 			for (int i = 0; i < movieCount; ++i)
 			{
@@ -257,7 +258,7 @@ int main(void)
 
 			fclose(fSave);
 
-			printf("%d items have been saved to the file.\n", movieCount);
+			printf("%zd items have been saved to the file.\n", movieCount);
 			break;
 		case SearchByName:
 			printf("Input title to search and press enter.\n");
