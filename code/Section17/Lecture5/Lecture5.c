@@ -53,15 +53,16 @@ Movie* FindMovieByIndex(Movie* head, int index)
 	return NULL;
 }
 
-Movie* AddMovie(Movie* head, Movie* node, int index)
+Movie* AddMovie(Movie** head, Movie* node, int index)
 {
 	if (index == 0)
 	{
-		node->next = head;
+		node->next = *head;
+		*head = node;
 		return node;
 	}
 
-	Movie* prev = FindMovieByIndex(head, index - 1);
+	Movie* prev = FindMovieByIndex(*head, index - 1);
 	if (prev == NULL)
 	{
 		return NULL;
@@ -70,19 +71,20 @@ Movie* AddMovie(Movie* head, Movie* node, int index)
 	node->next = prev->next;
 	prev->next = node;
 
-	return head;
+	return *head;
 }
 
-Movie* DeleteMovie(Movie* head, int index)
+Movie* DeleteMovie(Movie** head, int index)
 {
 	if (index == 0)
 	{
-		Movie* temp = head->next;
-		free(head);
+		Movie* temp = (*head)->next;
+		free(*head);
+		*head = temp;
 		return temp;
 	}
 
-	Movie* prev = FindMovieByIndex(head, index - 1);
+	Movie* prev = FindMovieByIndex(*head, index - 1);
 	if (prev == NULL)
 	{
 		return NULL;
@@ -94,7 +96,7 @@ Movie* DeleteMovie(Movie* head, int index)
 
 	prev->next = temp;
 
-	return head;
+	return *head;
 }
 
 int main(void)
@@ -106,7 +108,6 @@ int main(void)
 	Movie* head = NULL, * temp = NULL;
 	char saveFilename[TEXT_SIZE] = { '\0', };
 	char movieNameForSearch[TEXT_SIZE] = { '\0', };
-	int foundMovieByName = 0;
 
 	printf("Please input filename to read and press Enter.\n");
 	printf("%s ", PROMPT);
@@ -230,6 +231,10 @@ int main(void)
 			break;
 		case AddAnItem:
 			temp = (Movie*)malloc(sizeof(Movie));
+			if (temp == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
 
 			printf("Input title and press enter.\n");
 			printf("%s ", PROMPT);
@@ -239,7 +244,7 @@ int main(void)
 			printf("%s ", PROMPT);
 			scanf("%f%*c", &temp->rating);
 
-			head = AddMovie(head, temp, movieCount);
+			AddMovie(&head, temp, movieCount);
 			++movieCount;
 
 			printf("%zd: \"%s\", %.1f\n",
@@ -259,6 +264,10 @@ int main(void)
 			}
 
 			temp = (Movie*)malloc(sizeof(Movie));
+			if (temp == NULL)
+			{
+				exit(EXIT_FAILURE);
+			}
 
 			printf("Input title and press enter.\n");
 			printf("%s ", PROMPT);
@@ -268,7 +277,7 @@ int main(void)
 			printf("%s ", PROMPT);
 			scanf("%f%*c", &temp->rating);
 
-			head = AddMovie(head, temp, selectedIndex);
+			AddMovie(&head, temp, selectedIndex);
 			++movieCount;
 
 			printf("%zd: \"%s\", %.1f\n",
@@ -287,14 +296,14 @@ int main(void)
 				break;
 			}
 
-			head = DeleteMovie(head, selectedIndex);
+			DeleteMovie(&head, selectedIndex);
 
 			--movieCount;
 			break;
 		case DeleteAllItems:
 			while (head == NULL)
 			{
-				head = DeleteMovie(head, 0);
+				DeleteMovie(&head, 0);
 			}
 
 			movieCount = 0;
@@ -347,8 +356,6 @@ int main(void)
 				printf("No movie found: %s\n", movieNameForSearch);
 			}
 			temp = NULL;
-
-			foundMovieByName = 0;
 			break;
 		case Quit:
 			while (head == NULL)
