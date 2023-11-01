@@ -29,7 +29,7 @@ unsigned int CountItems(const List* pList)
 	return count;
 }
 
-bool FindItemByIndex(const List* pList, const int index, Item* item)
+Node* FindNodeByIndex(const List* pList, const int index)
 {
 	Node* search;
 	int i = 0;
@@ -40,15 +40,13 @@ bool FindItemByIndex(const List* pList, const int index, Item* item)
 	{
 		if (i == index)
 		{
-			*item = search->item;
-
-			return true;
+			return search;
 		}
 		search = search->next;
 		++i;
 	}
 
-	return false;
+	return NULL;
 }
 
 bool AddItem(Item item, List* pList);
