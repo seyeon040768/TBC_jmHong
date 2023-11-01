@@ -125,9 +125,28 @@ bool RemoveItem(List* pList, int index)
 	return true;
 }
 
-bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool (*CompareFunc)(Item a, Item b));
+bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool (*CompareFunc)(Item a, Item b))
+{
+	Node* search;
+	int i = 0;
 
-unsigned int CountItems(const List* pList);
+	search = pList->head;
+
+	while (search != NULL)
+	{
+		if ((*CompareFunc)(search->item, itemToFind))
+		{
+			*index = i;
+			*itemFound = search->item;
+			return true;
+		}
+		search = search->next;
+		++i;
+	}
+
+	return false;
+}
+
 void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item));
 void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* file, Item item));
 
