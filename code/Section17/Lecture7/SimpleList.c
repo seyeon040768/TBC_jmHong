@@ -49,8 +49,39 @@ Node* FindNodeByIndex(const List* pList, const int index)
 	return NULL;
 }
 
-bool AddItem(Item item, List* pList);
-void InsertByIndex(Item item, List* pList, int index);
+bool AddItem(Item item, List* pList, const int index)
+{
+	if (index < 0 || index > pList->size)
+	{
+		return false;
+	}
+
+	Node* node = (Node*)malloc(sizeof(Node*));
+	if (node == NULL)
+	{
+		printf("malloc Error\n");
+		exit(EXIT_FAILURE);
+	}
+	node->item = item;
+	node->next = NULL;
+
+	if (index == 0)
+	{
+		node->next = pList->head->next;
+
+		pList->head = node;
+
+		return true;
+	}
+
+	Node* prev = FindNodeByIndex(pList, index - 1);
+
+	node->next = prev->next;
+	prev->next = node;
+
+	return true;
+}
+
 void RemoveByIndex(List* pList, int index);
 bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool (*CompareFunc)(Item a, Item b));
 

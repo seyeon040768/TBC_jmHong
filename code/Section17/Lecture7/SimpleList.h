@@ -29,8 +29,7 @@ void InitializeList(List* pList);
 bool IsEmpty(const List* pList);
 unsigned int CountItems(const List* pList);
 Node* FindNodeByIndex(const List* pList, const int index);
-bool AddItem(Item item, List* pList);
-void InsertByIndex(Item item, List* pList, int index);
+bool AddItem(Item item, List* pList, const int index);
 void RemoveByIndex(List* pList, int index);
 bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool (*CompareFunc)(Item a, Item b));
 
