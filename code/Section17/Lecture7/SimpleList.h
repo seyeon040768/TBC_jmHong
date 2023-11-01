@@ -28,6 +28,7 @@ typedef struct List
 void InitializeList(List* pList);
 bool IsEmpty(const List* pList);
 unsigned int CountItems(const List* pList);
+bool FindItemByIndex(const List* pList, const int index, Item* item);
 bool AddItem(Item item, List* pList);
 void InsertByIndex(Item item, List* pList, int index);
 void RemoveByIndex(List* pList, int index);
@@ -39,5 +40,4 @@ void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* 
 void Traverse(const List* pList, void (*pFunc)(Item item));
 void ClearList(List* pList);
 
-bool FindItemByIndex(const List* pList, const int index, Item** item);
 void RemoveFirstItem(List* pList);
