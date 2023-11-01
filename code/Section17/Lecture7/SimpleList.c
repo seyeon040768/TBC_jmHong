@@ -65,6 +65,8 @@ bool AddItem(Item item, List* pList, const int index)
 	node->item = item;
 	node->next = NULL;
 
+	++(pList->size);
+
 	if (index == 0)
 	{
 		node->next = pList->head->next;
@@ -75,6 +77,12 @@ bool AddItem(Item item, List* pList, const int index)
 	}
 
 	Node* prev = FindNodeByIndex(pList, index - 1);
+	if (prev == NULL)
+	{
+		free(node);
+		--(pList->size);
+		return false;
+	}
 
 	node->next = prev->next;
 	prev->next = node;
@@ -82,7 +90,41 @@ bool AddItem(Item item, List* pList, const int index)
 	return true;
 }
 
-void RemoveByIndex(List* pList, int index);
+bool RemoveItem(List* pList, int index)
+{
+	if (index < 0 || index > pList->size)
+	{
+		return false;
+	}
+
+	Node* temp = NULL;
+
+	if (index == 0)
+	{
+		temp = pList->head;
+		pList->head = pList->head->next;
+		free(temp);
+
+		--(pList->size);
+
+		return true;
+	}
+
+	Node* prev = FindNodeByIndex(pList, index - 1);
+	if (prev == NULL)
+	{
+		return false;
+	}
+
+	temp = prev->next;
+	prev->next = prev->next->next;
+	free(temp);
+
+	--(pList->size);
+
+	return true;
+}
+
 bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool (*CompareFunc)(Item a, Item b));
 
 unsigned int CountItems(const List* pList);
