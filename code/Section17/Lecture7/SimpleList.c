@@ -12,7 +12,23 @@ bool IsEmpty(const List* pList)
 	return pList->head == NULL;
 }
 
-unsigned int CountItems(const List* pList);
+unsigned int CountItems(const List* pList)
+{
+	Node* search;
+	unsigned int count = 0;
+
+	search = pList->head;
+
+	while (search != NULL)
+	{
+		search = search->next;
+
+		++count;
+	}
+
+	return count;
+}
+
 bool FindItemByIndex(const List* pList, const int index, Item** item);
 bool AddItem(Item item, List* pList);
 void InsertByIndex(Item item, List* pList, int index);
