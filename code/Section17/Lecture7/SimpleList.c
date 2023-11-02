@@ -154,10 +154,22 @@ void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item))
 	while (search != NULL)
 	{
 		(*PrintAnItemFunc)(search->item);
+
+		search = search->next;
 	}
 }
 
-void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* file, Item item));
+void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* file, Item item))
+{
+	Node* search = pList->head;
+
+	while (search != NULL)
+	{
+		(*WriteAnItemFunc)(file, search->item);
+
+		search = search->next;
+	}
+}
 
 void Traverse(const List* pList, void (*pFunc)(Item item));
 void ClearList(List* pList);
