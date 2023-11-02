@@ -171,7 +171,28 @@ void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* 
 	}
 }
 
-void Traverse(const List* pList, void (*pFunc)(Item item));
-void ClearList(List* pList);
+void Traverse(const List* pList, void (*pFunc)(Item item))
+{
+	Node* search = pList->head;
 
-void RemoveFirstItem(List* pList);
+	while (search != NULL)
+	{
+		(*pFunc)(search->item);
+
+		search = search->next;
+	}
+}
+
+void ClearList(List* pList)
+{
+	Node* search = pList->head;
+
+	while (search != NULL)
+	{
+		Node* next = search->next;
+
+		free(search);
+
+		search = next;
+	}
+}

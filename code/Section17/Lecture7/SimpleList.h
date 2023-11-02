@@ -38,5 +38,3 @@ void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* 
 
 void Traverse(const List* pList, void (*pFunc)(Item item));
 void ClearList(List* pList);
-
-void RemoveFirstItem(List* pList);
