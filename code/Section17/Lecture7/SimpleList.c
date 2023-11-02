@@ -147,7 +147,16 @@ bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool 
 	return false;
 }
 
-void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item));
+void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item))
+{
+	Node* search = pList->head;
+
+	while (search != NULL)
+	{
+		(*PrintAnItemFunc)(search->item);
+	}
+}
+
 void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* file, Item item));
 
 void Traverse(const List* pList, void (*pFunc)(Item item));
