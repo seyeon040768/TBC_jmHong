@@ -22,7 +22,7 @@ typedef struct Node
 typedef struct List
 {
 	Node* head;
-	int size;
+	unsigned int size;
 } List;
 
 void InitializeList(List* pList);
