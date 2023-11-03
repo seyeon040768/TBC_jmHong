@@ -5,6 +5,7 @@
 void InitializeList(List* pList)
 {
 	pList->head = NULL;
+	pList->size = 0;
 }
 
 bool IsEmpty(const List* pList)
@@ -195,4 +196,6 @@ void ClearList(List* pList)
 
 		search = next;
 	}
+
+	pList->size = 0;
 }
