@@ -33,7 +33,7 @@ bool AddItem(Item item, List* pList, const int index);
 bool RemoveItem(List* pList, int index);
 bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool (*CompareFunc)(Item a, Item b));
 
-void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item));
+void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item, int i));
 void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* file, Item item));
 
 void Traverse(const List* pList, void (*pFunc)(Item item));

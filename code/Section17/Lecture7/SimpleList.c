@@ -148,13 +148,15 @@ bool Find(const List* pList, Item itemToFind, int* index, Item* itemFound, bool 
 	return false;
 }
 
-void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item))
+void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item, int i))
 {
 	Node* search = pList->head;
+	int i = 0;
 
 	while (search != NULL)
 	{
-		(*PrintAnItemFunc)(search->item);
+		(*PrintAnItemFunc)(search->item, i);
+		++i;
 
 		search = search->next;
 	}
