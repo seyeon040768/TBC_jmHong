@@ -57,7 +57,7 @@ bool AddItem(Item item, List* pList, const int index)
 		return false;
 	}
 
-	Node* node = (Node*)malloc(sizeof(Node*));
+	Node* node = (Node*)malloc(sizeof(Node));
 	if (node == NULL)
 	{
 		printf("malloc Error\n");
@@ -66,13 +66,21 @@ bool AddItem(Item item, List* pList, const int index)
 	node->item = item;
 	node->next = NULL;
 
-	++(pList->size);
+	if (pList->size == 0)
+	{
+		pList->head = node;
+		++(pList->size);
+
+		return true;
+	}
 
 	if (index == 0)
 	{
 		node->next = pList->head->next;
 
 		pList->head = node;
+
+		++(pList->size);
 
 		return true;
 	}
@@ -81,12 +89,13 @@ bool AddItem(Item item, List* pList, const int index)
 	if (prev == NULL)
 	{
 		free(node);
-		--(pList->size);
 		return false;
 	}
 
 	node->next = prev->next;
 	prev->next = node;
+
+	++(pList->size);
 
 	return true;
 }
