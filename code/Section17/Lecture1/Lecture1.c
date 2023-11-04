@@ -14,8 +14,8 @@ typedef struct Movie
 
 enum Menu
 {
-	PrintAllItmes = 1,
-	PrintAnItem,
+	EPrintAllItems = 1,
+	EPrintAnItem,
 	EditAnItem,
 	AddAnItem,
 	InsertAnItem,
@@ -127,13 +127,13 @@ int main(void)
 
 		switch (selectedMenu)
 		{
-		case PrintAllItmes:
+		case EPrintAllItems:
 			for (int i = 0; i < movieCount; ++i)
 			{
 				printf("%d: \"%s\", %.1f\n", i, movieArray[i].title, movieArray[i].rating);
 			}
 			break;
-		case PrintAnItem:
+		case EPrintAnItem:
 			printf("Input the index of item to print.\n");
 			printf("%s ", PROMPT);
 			scanf("%d", &selectedIndex);
