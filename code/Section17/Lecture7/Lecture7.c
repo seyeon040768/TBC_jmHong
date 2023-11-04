@@ -1,9 +1,7 @@
 #include <stdio.h>
-#include "SimpleList.h"
-
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+
+#include "SimpleList.h"
 
 #define PROMPT ">>"
 
