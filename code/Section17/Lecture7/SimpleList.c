@@ -171,6 +171,23 @@ void PrintAllItems(const List* pList, void (*PrintAnItemFunc)(Item item, int i))
 	}
 }
 
+void PrintAnItem(const List* pList, const int index, void (*PrintAnItemFunc)(Item item, int i))
+{
+	if (index < 0 || index > pList->size)
+	{
+		return;
+	}
+
+	Node* search = FindNodeByIndex(pList, index);
+
+	if (search == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+
+	(*PrintAnItemFunc)(search->item, index);
+}
+
 void WriteAllItems(const List* pList, FILE* file, void (*WriteAnItemFunc)(FILE* file, Item item))
 {
 	Node* search = pList->head;
