@@ -29,5 +29,11 @@ void Push(Stack* stack, Element item)
 
 Element Pop(Stack* stack)
 {
+	if (IsEmpty)
+	{
+		printf("Stack is empty. Cannot remove.\n");
+		return;
+	}
 
+	--(stack->top);
 }
