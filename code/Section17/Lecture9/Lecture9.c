@@ -41,7 +41,7 @@ int main(void)
 	Push(&myStack, GetElement(4));
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(5);
+	Push(&myStack, GetElement(5));
 	PrintStack(&myStack);
 
 	Push(&myStack, GetElement(6));

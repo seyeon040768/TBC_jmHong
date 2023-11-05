@@ -17,7 +17,7 @@ bool IsEmpty(const Stack* stack)
 
 void Push(Stack* stack, Element item)
 {
-	if (IsFull)
+	if (IsFull(stack))
 	{
 		printf("Stack is full. Cannot add.\n");
 		return;
@@ -29,7 +29,7 @@ void Push(Stack* stack, Element item)
 
 Element Pop(Stack* stack)
 {
-	if (IsEmpty)
+	if (IsEmpty(stack))
 	{
 		printf("Stack is empty. Cannot remove.\n");
 		return;
