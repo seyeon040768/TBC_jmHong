@@ -17,7 +17,14 @@ bool IsEmpty(const Stack* stack)
 
 void Push(Stack* stack, Element item)
 {
+	if (IsFull)
+	{
+		printf("Stack is full. Cannot add.\n");
+		return;
+	}
 
+	++(stack->top);
+	stack->items[stack->top] = item;
 }
 
 Element Pop(Stack* stack)
