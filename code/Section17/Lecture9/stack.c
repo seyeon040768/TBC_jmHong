@@ -32,8 +32,8 @@ Element Pop(Stack* stack)
 	if (IsEmpty(stack))
 	{
 		printf("Stack is empty. Cannot remove.\n");
-		return;
+		return (Element) { .key = -1 };
 	}
 
-	--(stack->top);
+	return stack->items[(stack->top)--];
 }
