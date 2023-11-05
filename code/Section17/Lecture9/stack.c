@@ -12,7 +12,7 @@ bool IsFull(const Stack* stack)
 
 bool IsEmpty(const Stack* stack)
 {
-
+	return stack->top == -1;
 }
 
 void Push(Stack* stack, Element item)
