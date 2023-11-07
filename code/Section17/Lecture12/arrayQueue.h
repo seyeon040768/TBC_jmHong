@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "element.h"
 
-#define MAX_QUEUE_SIZE 8
+#define MAX_QUEUE_SIZE 4
 
 typedef struct Queue
 {
@@ -19,4 +19,4 @@ bool IsEmpty(const Queue* queue);
 int CountItem(const Queue* queue);
 bool EnQueue(Element item, Queue* queue);
 bool DeQueue(Element* pItem, Queue* queue);
-void TraverseQueue(Queue* queue, void (*func)(Element item));
+void Traverse(Queue* queue, void (*func)(Element item));

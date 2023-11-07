@@ -127,7 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lecture12.cpp" />
+    <ClCompile Include="arrayQueue.c" />
+    <ClCompile Include="Lecture12.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="arrayQueue.h" />
+    <ClInclude Include="element.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
