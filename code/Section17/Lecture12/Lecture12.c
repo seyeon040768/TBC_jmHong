@@ -75,5 +75,22 @@ int main(void)
 	}
 	PrintQueue(&queue);
 
+
+	printf("------- Circulation Test -------\n");
+
+	Initialize(&queue);
+
+	for (int i = 0; i < 10; ++i)
+	{
+		EnQueue(GetItem(1), &queue);
+		PrintQueue(&queue);
+
+		if (DeQueue(&temp, &queue))
+		{
+			printf("Item from queue: %d\n", temp.key);
+		}
+		PrintQueue(&queue);
+	}
+
 	return 0;
 }
