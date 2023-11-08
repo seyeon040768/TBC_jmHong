@@ -7,6 +7,8 @@ Element GetItem(const int key)
 {
 	Element newItem;
 	newItem.key = key;
+
+	return newItem;
 }
 
 void PrintItem(Element item)

@@ -18,6 +18,9 @@
     <ClCompile Include="Lecture13.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="linkedQueue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linkedQueue.h">

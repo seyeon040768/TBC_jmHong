@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lecture13.c" />
+    <ClCompile Include="linkedQueue.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linkedQueue.h" />
