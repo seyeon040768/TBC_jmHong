@@ -18,7 +18,7 @@ bool IsEmpty(const Queue* queue)
 	return queue->front == queue->rear;
 }
 
-bool EnQueue(Element item, Queue* queue)
+bool EnQueue(Item item, Queue* queue)
 {
 	if (IsFull(queue))
 	{
@@ -35,7 +35,7 @@ bool EnQueue(Element item, Queue* queue)
 	return true;
 }
 
-bool DeQueue(Element* pItem, Queue* queue)
+bool DeQueue(Item* pItem, Queue* queue)
 {
 	if (IsEmpty(queue))
 	{
@@ -52,7 +52,7 @@ bool DeQueue(Element* pItem, Queue* queue)
 	return true;
 }
 
-void Traverse(Queue* queue, void (*func)(Element item))
+void Traverse(Queue* queue, void (*func)(Item item))
 {
 	// itemCount의 최대값은 MAX_QUEUE_SIZE - 1
 	for (int i = 1; i <= queue->itemCount; ++i)
