@@ -4,14 +4,14 @@
 
 #define MAX_QUEUE_SIZE 3
 
-typedef struct Element
+typedef struct Item
 {
 	int key;
-} Element;
+} Item;
 
 typedef struct Node
 {
-	Element item;
+	Item item;
 	struct Node* next;
 } Node;
 
@@ -25,6 +25,6 @@ typedef struct Queue
 void Initialize(Queue* queue);
 bool IsFull(const Queue* queue);
 bool IsEmpty(const Queue* queue);
-bool EnQueue(Element item, Queue* queue);
-bool DeQueue(Element* pItem, Queue* queue);
-void Traverse(Queue* queue, void (*func)(Element item));
+bool EnQueue(Item item, Queue* queue);
+bool DeQueue(Item* pItem, Queue* queue);
+void Traverse(Queue* queue, void (*func)(Item item));

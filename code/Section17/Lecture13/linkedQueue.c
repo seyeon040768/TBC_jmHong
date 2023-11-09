@@ -20,7 +20,7 @@ bool IsEmpty(const Queue* queue)
 	return queue->itemCount == 0;
 }
 
-bool EnQueue(Element item, Queue* queue)
+bool EnQueue(Item item, Queue* queue)
 {
 	if (IsFull(queue))
 	{
@@ -52,7 +52,7 @@ bool EnQueue(Element item, Queue* queue)
 	return true;
 }
 
-bool DeQueue(Element* pItem, Queue* queue)
+bool DeQueue(Item* pItem, Queue* queue)
 {
 	if (IsEmpty(queue))
 	{
@@ -78,7 +78,7 @@ bool DeQueue(Element* pItem, Queue* queue)
 	return true;
 }
 
-void Traverse(Queue* queue, void (*func)(Element item))
+void Traverse(Queue* queue, void (*func)(Item item))
 {
 	Node* search = queue->front;
 

@@ -3,15 +3,15 @@
 
 #include "linkedQueue.h"
 
-Element GetItem(const int key)
+Item GetItem(const int key)
 {
-	Element newItem;
+	Item newItem;
 	newItem.key = key;
 
 	return newItem;
 }
 
-void PrintItem(Element item)
+void PrintItem(Item item)
 {
 	printf("%d ", item.key);
 }
@@ -37,7 +37,7 @@ void PrintQueue(Queue* queue)
 int main(void)
 {
 	Queue queue;
-	Element temp;
+	Item temp;
 
 	Initialize(&queue);
 
