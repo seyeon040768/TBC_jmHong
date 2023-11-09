@@ -15,7 +15,7 @@ bool IsEmpty(const Stack* stack)
 	return stack->top == -1;
 }
 
-void Push(Stack* stack, Element item)
+void Push(Stack* stack, Item item)
 {
 	if (IsFull(stack))
 	{
@@ -27,12 +27,12 @@ void Push(Stack* stack, Element item)
 	stack->items[stack->top] = item;
 }
 
-Element Pop(Stack* stack)
+Item Pop(Stack* stack)
 {
 	if (IsEmpty(stack))
 	{
 		printf("Stack is empty. Cannot remove.\n");
-		return (Element) { .key = -1 };
+		return (Item) { .key = -1 };
 	}
 
 	return stack->items[(stack->top)--];

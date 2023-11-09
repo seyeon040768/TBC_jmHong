@@ -18,11 +18,11 @@ PrintStack(const Stack* stack)
 	printf("\n");
 }
 
-Element GetElement(const int key)
+Item GetItem(const int key)
 {
-	Element newElement;
-	newElement.key = key;
-	return newElement;
+	Item newItem;
+	newItem.key = key;
+	return newItem;
 }
 
 int main(void)
@@ -32,22 +32,22 @@ int main(void)
 	Initialize(&myStack);
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(1));
+	Push(&myStack, GetItem(1));
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(3));
+	Push(&myStack, GetItem(3));
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(4));
+	Push(&myStack, GetItem(4));
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(5));
+	Push(&myStack, GetItem(5));
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(6));
+	Push(&myStack, GetItem(6));
 	PrintStack(&myStack);
 
-	Push(&myStack, GetElement(7));
+	Push(&myStack, GetItem(7));
 	PrintStack(&myStack);
 
 	for (int i = 0; i < MAX_STACK_SIZE + 1; ++i)
