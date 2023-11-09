@@ -1,7 +1,7 @@
 #pragma once
 
-typedef struct
+typedef struct Item
 {
 	int i;
 	int j;
-} Element;
+} Item;

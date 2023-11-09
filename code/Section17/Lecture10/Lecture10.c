@@ -29,12 +29,12 @@ void PrintMap()
 	printf("\n");
 }
 
-Element GetElement(const int i, const int j)
+Item GetItem(const int i, const int j)
 {
-	Element newElement;
-	newElement.i = i;
-	newElement.j = j;
-	return newElement;
+	Item newItem;
+	newItem.i = i;
+	newItem.j = j;
+	return newItem;
 }
 
 void PrintStack(const Stack* stack)
@@ -60,12 +60,12 @@ int main(void)
 	Stack toVisit;
 	Initialize(&toVisit);
 
-	Push(&toVisit, GetElement(0, 0));
-	//Push(&toVisit, GetElement(3, 3));
+	Push(&toVisit, GetItem(0, 0));
+	//Push(&toVisit, GetItem(3, 3));
 
 	while (!IsEmpty(&toVisit))
 	{
-		Element cell = Pop(&toVisit);
+		Item cell = Pop(&toVisit);
 
 		if (map[cell.i][cell.j] != 0)
 		{
@@ -76,22 +76,22 @@ int main(void)
 
 		if (cell.i - 1 >= 0 && map[cell.i - 1][cell.j] == 0)
 		{ 
-			Push(&toVisit, (Element) { .i= cell.i - 1, .j = cell.j });
+			Push(&toVisit, (Item) { .i= cell.i - 1, .j = cell.j });
 		}
 
 		if (cell.i + 1 < HEIGHT && map[cell.i + 1][cell.j] == 0)
 		{
-			Push(&toVisit, (Element) { .i = cell.i + 1, .j = cell.j });
+			Push(&toVisit, (Item) { .i = cell.i + 1, .j = cell.j });
 		}
 
 		if (cell.j - 1 >= 0 && map[cell.i][cell.j - 1] == 0)
 		{
-			Push(&toVisit, (Element) { .i = cell.i, .j = cell.j - 1 });
+			Push(&toVisit, (Item) { .i = cell.i, .j = cell.j - 1 });
 		}
 
 		if (cell.j + 1 < WIDTH && map[cell.i][cell.j + 1] == 0)
 		{
-			Push(&toVisit, (Element) { .i = cell.i, .j = cell.j + 1 });
+			Push(&toVisit, (Item) { .i = cell.i, .j = cell.j + 1 });
 		}
 
 		// Debugging
