@@ -94,5 +94,7 @@ int main(void)
 		PrintQueue(&queue);
 	}
 
+	while (DeQueue(&temp, &queue));
+
 	return 0;
 }
