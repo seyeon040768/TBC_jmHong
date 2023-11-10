@@ -17,11 +17,11 @@ int InputInt()
 	return num;
 }
 
-void MakeRandomNumbers(int count, int* array)
+void MakeRandomNumbers(int range, int count, int* array)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		*(array + i) = rand() % 60;
+		*(array + i) = rand() % range;
 	}
 }
 
@@ -51,7 +51,7 @@ int main(void)
 	Queue orderQueue;
 	Initialize(&orderQueue);
 
-	int simulationHours, customerPerHour;
+	int simulationHours, customerPerHour, totalHours, totalCustomers;
 	int accepted = 0;
 	int served = 0;
 	int lost = 0;
@@ -59,6 +59,8 @@ int main(void)
 
 	double avgQueueSize = 0.0;
 	double avgWaitTime = 0.0;
+
+	Item temp;
 
 	srand(time(NULL));
 
@@ -70,38 +72,66 @@ int main(void)
 	printf("%s ", PROMPT);
 	customerPerHour = InputInt();
 
+	totalHours = simulationHours * 60;
+	totalCustomers = simulationHours * customerPerHour;
 
-	int* randomMinutes = (int*)malloc(customerPerHour * sizeof(int));
+
+	int* randomMinutes = (int*)malloc(totalCustomers * sizeof(int));
 	if (randomMinutes == NULL)
 	{
 		exit(EXIT_FAILURE);
 	}
-	for (int i = 0; i < simulationHours; ++i)
-	{
-		MakeRandomNumbers(customerPerHour, randomMinutes);
+	MakeRandomNumbers(totalHours, totalCustomers, randomMinutes);
 
-		for (int j = 0; j < 60; ++j)
+	for (int m = 0; m < totalHours; ++m)
+	{
+		for (int k = 0; k < totalCustomers; ++k)
 		{
-			for (int k = 0; i < customerPerHour; ++k)
+			if (*(randomMinutes + k) == m)
 			{
-				if (*(randomMinutes + k) == j)
+				if (AddOrder(&orderQueue, m, rand() % 3 + 1))
 				{
-					if (AddOrder(&orderQueue, j, rand() % 3 + 1))
-					{
-						++accepted;
-					}
-					else
-					{
-						++lost;
-					}
+					++accepted;
+				}
+				else
+				{
+					printf(" %d: Customer lost\n", m);
+					++lost;
 				}
 			}
-
 		}
+
+		if (remainedTime <= 0 && !IsEmpty(&orderQueue))
+		{
+			DeQueue(&temp, &orderQueue);
+
+			printf(" %d: start serving a customer for %d minutes.\n", m, temp.processTime);
+
+			remainedTime = temp.processTime;
+
+			++served;
+
+			avgWaitTime += m - temp.arrivalTime;
+		}
+		--remainedTime;
+
+		avgQueueSize += orderQueue.itemCount;
 	}
 	free(randomMinutes);
 
+	avgQueueSize /= simulationHours;
 
+	while (DeQueue(&temp, &orderQueue))
+	{
+		avgWaitTime += temp.arrivalTime;
+	}
+	avgWaitTime /= accepted;
+
+	printf("customers accepted: %d\n", accepted);
+	printf("customers served: %d\n", served);
+	printf("Lost: %d\n", lost);
+	printf("average queue size: %.2lf\n", avgQueueSize);
+	printf("average wait time: %.2lf minutes\n", avgWaitTime);
 
 	return 0;
 }

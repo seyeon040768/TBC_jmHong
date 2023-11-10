@@ -4,7 +4,7 @@
 
 #define TEXT_SIZE 100
 
-#define MAX_QUEUE_SIZE 10
+#define MAX_QUEUE_SIZE 30
 
 typedef struct Customer
 {
