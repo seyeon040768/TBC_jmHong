@@ -26,22 +26,56 @@ typedef struct
 
 void PrintItems(Item items[], int size)
 {
-
+	for (int i = 0; i < size; ++i)
+	{
+		printf("%d: %d\n", items[i].key, items[i].value);
+	}
+	printf("\n");
 }
 
-int CompareItmes(const void* first, const void* second)
+int CompareItems(const void* first, const void* second)
 {
-
+	return ((Item*)first)->key - ((Item*)second)->key;
 }
 
 const Item* SequentialSearch(const Item items[], const int size, const int key)
 {
+	for (int i = 0; i < size; ++i)
+	{
+		if (items[i].key == key)
+		{
+			return &items[i];
+		}
+	}
 
+	return NULL;
 }
 
 const Item* BinarySearch(const Item items[], const int size, const int key)
 {
+	int first = 0;
+	int last = size - 1;
+	int pivot = (first + last) / 2;
 
+	while (last - first >= 0)
+	{
+		pivot = (first + last) / 2;
+
+		if (items[pivot].key == key)
+		{
+			return &items[pivot];
+		}
+		else if (items[pivot].key > key)
+		{
+			last = pivot - 1;
+		}
+		else
+		{
+			first = pivot + 1;
+		}
+	}
+
+	return NULL;
 }
 
 int main(void)
@@ -49,16 +83,16 @@ int main(void)
 	/* Assume that there is no duplicated items */
 
 	Item items[] = {
-		{0, 10},
 		{1, 11},
-		{2, 12},
-		{3, 13},
-		{4, 14},
-		{5, 15},
 		{6, 16},
-		{7, 17},
+		{4, 14},
 		{8, 18},
-		{9, 19}
+		{2, 12},
+		{9, 19},
+		{0, 10},
+		{5, 15},
+		{3, 13},
+		{7, 17},
 	};
 
 	int n = sizeof(items) / sizeof(items[0]);
@@ -81,6 +115,7 @@ int main(void)
 			break;
 		}
 
+		//const Item* found = SequentialSearch(items, n, key);
 		const Item* found = BinarySearch(items, n, key);
 
 		if (found)
