@@ -10,7 +10,10 @@ int InputInt()
 {
 	int num;
 
-	scanf("%d", &num);
+	while (scanf("%d", &num) != 1)
+	{
+		while (getchar() != '\n');
+	}
 
 	while (getchar() != '\n');
 
