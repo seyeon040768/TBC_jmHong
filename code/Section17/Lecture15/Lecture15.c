@@ -57,7 +57,7 @@ const Item* BinarySearch(const Item items[], const int size, const int key)
 	int last = size - 1;
 	int pivot = (first + last) / 2;
 
-	while (last - first >= 0)
+	while (first <= last)
 	{
 		pivot = (first + last) / 2;
 
