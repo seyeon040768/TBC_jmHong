@@ -99,7 +99,7 @@ int main(void)
 
 	PrintItems(items, n);
 
-	qsort(items, n, sizeof(Item), CompareItmes);
+	qsort(items, n, sizeof(Item), CompareItems);
 
 	PrintItems(items, n);
 
