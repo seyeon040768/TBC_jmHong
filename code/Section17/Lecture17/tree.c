@@ -14,12 +14,12 @@ void Initialize(Tree* pTree, int(Compare)(const Item item1, const Item item2))
 
 bool IsEmpty(const Tree* pTree)
 {
-
+	return pTree->root == NULL;
 }
 
 bool IsFull(const Tree* pTree)
 {
-
+	return pTree->size == MAX_TREE_SIZE;
 }
 
 bool AddItem(const Item* pi, Tree* pTree)
