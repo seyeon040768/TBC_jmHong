@@ -3,9 +3,13 @@
 
 #include "tree.h"
 
+static int(*CompareFunc)(const Item item1, const Item item2) = NULL;
+
 void Initialize(Tree* pTree, int(Compare)(const Item item1, const Item item2))
 {
-
+	pTree->root = NULL;
+	pTree->size = NULL;
+	CompareFunc = Compare;
 }
 
 bool IsEmpty(const Tree* pTree)
