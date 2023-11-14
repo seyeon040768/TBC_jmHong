@@ -39,12 +39,18 @@ bool IsFull(const Tree* pTree)
 
 bool AddItem(const Item* pItem, Tree* pTree)
 {
+	if (IsFull(pTree))
+	{
+		return false;
+	}
+
 	if (IsEmpty(pTree))
 	{
 		if (!(pTree->root = MakeNode(*pItem)))
 		{
 			return false;
 		}
+
 		return true;
 	}
 
@@ -65,6 +71,7 @@ bool AddItem(const Item* pItem, Tree* pTree)
 				{
 					return false;
 				}
+
 				return true;
 			}
 			search = search->left;
@@ -77,6 +84,7 @@ bool AddItem(const Item* pItem, Tree* pTree)
 				{
 					return false;
 				}
+
 				return true;
 			}
 			search = search->right;
@@ -117,7 +125,7 @@ bool InTree(const Item* pItem, const Tree* pTree)
 
 bool DeleteItem(const Item* pItem, Tree* pTree)
 {
-
+	
 }
 
 void Traverse(const Tree* pTree, void (*pFunc)(Item item))
@@ -127,10 +135,34 @@ void Traverse(const Tree* pTree, void (*pFunc)(Item item))
 
 void DeleteAll(Tree* pTree)
 {
-
+	
 }
 
 Item* TreeSearch(Tree* pTree, const Item key)
 {
+	if (IsEmpty(pTree))
+	{
+		return NULL;
+	}
 
+	Node* search = pTree->root;
+
+	while (search != NULL)
+	{
+		if (key.key == search->item.key)
+		{
+			return &(search->item);
+		}
+
+		if (key.key < search->item.key)
+		{
+			search = search->left;
+		}
+		else
+		{
+			search = search->right;
+		}
+	}
+
+	return NULL;
 }
