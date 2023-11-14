@@ -51,6 +51,7 @@ bool AddItem(const Item* pItem, Tree* pTree)
 			return false;
 		}
 
+		++(pTree->size);
 		return true;
 	}
 
@@ -72,6 +73,7 @@ bool AddItem(const Item* pItem, Tree* pTree)
 					return false;
 				}
 
+				++(pTree->size);
 				return true;
 			}
 			search = search->left;
@@ -85,6 +87,7 @@ bool AddItem(const Item* pItem, Tree* pTree)
 					return false;
 				}
 
+				++(pTree->size);
 				return true;
 			}
 			search = search->right;
