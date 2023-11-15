@@ -193,9 +193,22 @@ bool DeleteItem(const Item* pItem, Tree* pTree)
 	}
 }
 
+void TraverseRecursive(Node* pNode, void (*pFunc)(Item item))
+{
+	if (pNode == NULL)
+	{
+		return;
+	}
+
+	TraverseRecursive(pNode->left, pFunc);
+	TraverseRecursive(pNode->right, pFunc);
+
+	(*pFunc)(pNode->item);
+}
+
 void Traverse(const Tree* pTree, void (*pFunc)(Item item))
 {
-
+	TraverseRecursive(pTree->root, pFunc);
 }
 
 void DeleteRecursive(Node* pNode)
