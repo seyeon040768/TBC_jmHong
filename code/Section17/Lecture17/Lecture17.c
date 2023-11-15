@@ -133,9 +133,11 @@ int main(void)
 	}
 
 	/* Deleting tests */
-	key = { 3, };
+	key.key = 1;
 	DeleteItem(&key, &tree);
 	PrintTree(&tree);
+
+	DeleteAll(&tree);
 
 	return 0;
 }

@@ -180,7 +180,7 @@ bool DeleteItem(const Item* pItem, Tree* pTree)
 	{
 		*previousNode = search->left;
 
-		Node* temp = (*previousNode)->right;
+		Node* temp = *previousNode;
 		while (temp->right != NULL)
 		{
 			temp = temp->right;
