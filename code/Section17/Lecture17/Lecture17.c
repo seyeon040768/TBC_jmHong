@@ -7,7 +7,7 @@
 
 int Compare(const Item first, const Item second)
 {
-	return first.key - first.value;
+	return first.key - second.key;
 }
 
 void PrintItem(Item item)
@@ -109,7 +109,7 @@ int main(void)
 	int n = sizeof(items) / sizeof(items[0]);
 
 	Tree tree;
-	Initialize(&tree, &Compare);
+	Initialize(&tree, Compare);
 
 	for (int i = 0; i < n; ++i)
 	{

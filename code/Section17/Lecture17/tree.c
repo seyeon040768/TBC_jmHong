@@ -59,12 +59,13 @@ bool AddItem(const Item* pItem, Tree* pTree)
 
 	while (search != NULL)
 	{
-		if (pItem->key == search->item.key)
+		int compare = (*CompareFunc)(*pItem, search->item);
+
+		if (compare == 0)
 		{
 			return false;
 		}
-
-		if (pItem->key < search->item.key)
+		else if (compare < 0)
 		{
 			if (search->left == NULL)
 			{
@@ -108,12 +109,13 @@ bool InTree(const Item* pItem, const Tree* pTree)
 
 	while (search != NULL)
 	{
-		if (pItem->key == search->item.key)
+		int compare = (*CompareFunc)(*pItem, search->item);
+
+		if (compare == 0)
 		{
 			return true;
 		}
-
-		if (pItem->key < search->item.key)
+		else if (compare < 0)
 		{
 			search = search->left;
 		}
@@ -133,12 +135,13 @@ bool DeleteItem(const Item* pItem, Tree* pTree)
 
 	while (search != NULL)
 	{
-		if (pItem->key == search->item.key)
+		int compare = (*CompareFunc)(*pItem, search->item);
+
+		if (compare == 0)
 		{
 			break;
 		}
-
-		if (pItem->key < search->item.key)
+		else if (compare < 0)
 		{
 			previousNode = &(search->left);
 			search = search->left;
@@ -240,12 +243,13 @@ Item* TreeSearch(Tree* pTree, const Item key)
 
 	while (search != NULL)
 	{
-		if (key.key == search->item.key)
+		int compare = (*CompareFunc)(key, search->item);
+
+		if (compare == 0)
 		{
 			return &(search->item);
 		}
-
-		if (key.key < search->item.key)
+		else if (compare < 0)
 		{
 			search = search->left;
 		}
