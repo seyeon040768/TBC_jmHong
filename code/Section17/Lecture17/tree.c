@@ -128,7 +128,69 @@ bool InTree(const Item* pItem, const Tree* pTree)
 
 bool DeleteItem(const Item* pItem, Tree* pTree)
 {
-	
+	Node** previousNode = &(pTree->root);
+	Node* search = pTree->root;
+
+	while (search != NULL)
+	{
+		if (pItem->key == search->item.key)
+		{
+			break;
+		}
+
+		if (pItem->key < search->item.key)
+		{
+			previousNode = &(search->left);
+			search = search->left;
+		}
+		else
+		{
+			previousNode = &(search->right);
+			search = search->right;
+		}
+	}
+
+	if (search == NULL)
+	{
+		return false;
+	}
+
+	if (search->left == NULL && search->right == NULL)
+	{
+		*previousNode = NULL;
+		free(search);
+
+		return true;
+	}
+	else if (search->left == NULL)
+	{
+		*previousNode = search->right;
+		free(search);
+
+		return true;
+	}
+	else if (search->right == NULL)
+	{
+		*previousNode = search->left;
+		free(search);
+
+		return true;
+	}
+	else
+	{
+		*previousNode = search->left;
+
+		Node* temp = (*previousNode)->right;
+		while (temp->right != NULL)
+		{
+			temp = temp->right;
+		}
+
+		temp->right = search->right;
+
+		free(search);
+		return true;
+	}
 }
 
 void Traverse(const Tree* pTree, void (*pFunc)(Item item))
