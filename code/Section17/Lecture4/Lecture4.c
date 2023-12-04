@@ -80,7 +80,7 @@ int main(void)
 	PrintAll(head);
 
 
-	/* Find ad delete an item */
+	/* Find add delete an item */
 	search = head;
 	struct Node* prev = NULL;
 
